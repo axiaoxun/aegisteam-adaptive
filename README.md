@@ -5,9 +5,26 @@
 > 面向中小单位的自适应安全运营平台,基于 AgentTeams + Skill + MCP + RAG + 可观测五层架构。
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
+[![Version](https://img.shields.io/badge/Version-v1.0.0-blue)](https://github.com/axiaoxun/aegisteam-adaptive/releases/tag/v1.0.0)
 [![AgentTeams](https://img.shields.io/badge/AgentTeams-hiclaw-orange)](https://higress.ai/hiclaw)
 [![Nacos](https://img.shields.io/badge/Nacos-AI%20Registry-green)](https://nacos.io)
+
+---
+
+## 🎬 评审快速入口
+
+| 入口 | 链接 | 说明 |
+|---|---|---|
+| 📂 **GitHub 仓库** | https://github.com/axiaoxun/aegisteam-adaptive | 完整源码,72 文件,Apache 2.0 |
+| 🏷 **v1.0.0 Release** | https://github.com/axiaoxun/aegisteam-adaptive/releases/tag/v1.0.0 | Release Notes + 源码 zip 下载 |
+| 📺 **演示视频** | (待上传 YouTube/Bilibili 后填入) | 15 分钟,3 编排流回放 |
+| 🖥 **Web Demo 直播** | https://axiaoxun.github.io/aegisteam-adaptive/ | 10 区大屏,点 ▶ 全部播放(需先启用 Pages) |
+| 📄 **方案文档** | [`docs/00-main.md`](docs/00-main.md) | 主文档 V1.2(5000 字) |
+| 🎨 **PPT 草稿** | [`ppt/AegIsLoop-Adaptive-18pages.md`](ppt/AegIsLoop-Adaptive-18pages.md) | 18 页结构化 Markdown |
+
+---
+
+## 🎯 项目定位
 
 ---
 
