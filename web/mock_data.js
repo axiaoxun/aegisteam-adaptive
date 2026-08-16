@@ -8,7 +8,7 @@ export const BRAND = {
   tagline: '8 个岗位化 Agent + 1 个灵活的人机协同层 = 1 支自适应增强的安全运营团队',
   version: '1.0.0',
   team: 'AegIsLoop Adaptive Team',
-  repo: 'axiaoxun/aegisloop-adaptive',
+  repo: 'axiaoxun/aegisteam-adaptive',
   license: 'Apache 2.0',
 };
 
