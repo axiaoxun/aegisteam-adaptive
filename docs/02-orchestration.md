@@ -495,7 +495,7 @@ graph TB
 |---|---|---|
 | 场景价值 | 25% | 1 个人机协同层(角色) + 8 Agent 的"7×24 SOC 团队"叙事贯穿全篇;3 类编排流覆盖告警/通报/新法规三大真实场景 |
 | 多 Agent 协同 | 25% | **3 类编排流(22+26+14 步)+ 拓扑图 + 升级路径**直接拿分,体现角色分工、上下文传递、状态跟踪;**7 个 Agent 协同的编排流 3(新法规响应)是亮点**,管理路+技术路双线并发 |
-| Skill 工程 | 25% | 编排流中每步都明确引用 Skill 名,对应 23 Skill(扩展 26 Skill)清单(见 01-agents-and-skills.md);**A6 新增 3 Skill(quality_governance / evidence_chain / adaptive_feedback)是 Adaptive 的差异化亮点** |
+| Skill 工程 | 25% | 编排流中每步都明确引用 Skill 名,对应 32 Skill 清单(见 01-agents-and-skills.md);**A6 新增 3 Skill(quality_governance / evidence_chain / adaptive_feedback)是 Adaptive 的差异化亮点** |
 | 工程落地 | 20% | 明确技术栈:AgentTeams / MCP / RAG(5 套含 KB-SupplyChain)/ AgentScope Studio,所有组件均给出 Mock 替身;A6 实时质量治理嵌入每个编排流关键节点 |
 | 开源 | 5% | 编排流可在 GitHub 开源,作为 1 个独立模块 `aegisloop-orchestrator`;A6 三个新 Skill 也单独开源 `aegisloop-quality-steward` |
 

@@ -1,6 +1,6 @@
 # AegIsLoop Adaptive
 
-**自适应 AI 安全运营团队** —— 8 个岗位化 Agent + 1 个人机协同层,让 1 名安全工程师拥有 7×24 的 SOC 能力。
+**自适应 AI 安全运营团队** —— 8 个岗位化安全 Agent + 1 个人机协同层,让 1 名安全工程师拥有 7×24 的 SOC 能力。
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/Version-v1.0.0-blue)](https://github.com/axiaoxun/aegisteam-adaptive/releases/tag/v1.0.0)

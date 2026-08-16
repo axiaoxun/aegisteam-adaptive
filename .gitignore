@@ -70,3 +70,9 @@ submission/
 *.dmg
 *.tar.gz
 *.tgz
+
+# 参赛提交物(本地保留,不入库)
+VIDEO.md
+CHECKLIST.md
+PUSH.md
+ppt/

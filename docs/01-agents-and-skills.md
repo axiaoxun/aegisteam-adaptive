@@ -1,8 +1,8 @@
-# AegIsLoop Adaptive — 8 Agent Identity 清单 + 26 Skill 详细定义
+# AegIsLoop Adaptive — 8 Agent Identity 清单 + 32 Skill 详细定义
 
 > 文档版本:V1.1 / 2026-08-15
 > 项目:AegIsLoop Adaptive(AegIsLoop 自适应 AI 安全运营)
-> 核心叙事:**8 Agent + 1 个灵活的人机协同层 = 1 支自适应增强的安全运营团队**
+> 核心叙事:**8 岗位化安全 Agent + 1 个人机协同层 = 7×24 自适应 AI 安全运营团队**
 > 人机协同层:支持多角色(安全工程师 / 合规官 / 资产管理员 / 业务负责人 / 法务 / HR),按需介入,角色化决策,不留具体人。
 > Agent 团队:8 个岗位化 Agent,其中 **A6 QualitySteward** 是 "Adaptive" 落地的关键 —— 没有它 AegIsLoop Adaptive 不会 Adaptive。
 > 模板来源:GOAI 比赛手册附录 A(Agent Identity) + 附录 B(Skill)
@@ -132,7 +132,7 @@
 
 ---
 
-## 第二部分:26 个 Skill 详细定义(附录 B 模板)
+## 第二部分:32 个 Skill 详细定义(附录 B 模板)
 
 ### 资产类(4 个)
 

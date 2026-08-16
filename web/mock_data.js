@@ -5,7 +5,7 @@ export const BRAND = {
   short: 'AegIsLoop',
   full: 'AegIsLoop Adaptive',
   cn: 'AegIsLoop 自适应 AI 安全运营系统',
-  tagline: '8 个岗位化 Agent + 1 个灵活的人机协同层 = 1 支自适应增强的安全运营团队',
+  tagline: '8 个岗位化安全 Agent + 1 个人机协同层 = 7×24 自适应 AI 安全运营团队',
   version: '1.0.0',
   team: 'AegIsLoop Adaptive Team',
   repo: 'axiaoxun/aegisteam-adaptive',

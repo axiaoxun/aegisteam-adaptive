@@ -108,7 +108,7 @@ MCP(Model Context Protocol)作为 Agent ↔ 外部工具的"USB-C"接口,本项�
 | 字段 | 内容 |
 |---|---|
 | **工具类别** | 资产管理 / 配置管理 |
-| **真实产品** | **腾讯蓝鲸 CMDB / 阿里云 ECS Inventory / Prometheus + 1Panel**(中小单位首选开源) |
+| **真实产品** | **腾讯蓝鲸 CMDB / 阿里云 ECS Inventory / Prometheus + 1Panel**(大部分政府事业单位与中小企业首选开源) |
 | **MCP Server 实现** | **stdio 模式**(`mcp-server-cmdb` Node.js 进程),资源(Resource)定义为 `cmdb://host/{host_id}`、`cmdb://service/{service_id}`、`cmdb://app/{app_id}`,工具(Tool)定义 `search_hosts`、`get_host_detail`、`update_host_tag`、`list_exposed_assets` |
 | **对接 Agent / Skill** | A1 资产管理 Agent(资产发现、SBOM 解析、暴露面扫描 3 个 Skill);A5 事件响应 Agent(主机隔离时反查 host_id);A6 审计 Agent(资产变更留痕) |
 | **数据交换格式** | `application/json`;MCP 工具调用 JSON-RPC 2.0 |

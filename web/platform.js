@@ -1,6 +1,6 @@
 // AegIsLoop · 自适应安全运营平台 — 人机协同控制台(用户侧 demo)
 // React 18 + htm(无 build step),浅色专业企业级风。
-// 定位:L0.5 人机协同层 —— 1 名安全工程师在此直接指挥 8 个岗位化 Agent,
+// 定位:L0.5 人机协同层 —— 1 名安全工程师在此直接指挥 8 个岗位化安全 Agent,
 // 审批回复高危操作、下发任务、配置钉钉接入、编排合规场景。
 // 纯前端 demo,数据为 mock,交互可点击。
 
@@ -231,7 +231,7 @@ function Sidebar({ view, setView, pendingCount, open, onClose }) {
             <${StatusDot} color="#10b981" />
             <span className="text-[12px] font-semibold text-slate-700">团队在线 8/8</span>
           </div>
-          <div className="text-[10px] text-slate-400 leading-relaxed">1 名安全工程师 + 8 个岗位化 Agent,7×24 自适应值守</div>
+          <div className="text-[10px] text-slate-400 leading-relaxed">1 名安全工程师 + 8 个岗位化安全 Agent,7×24 自适应值守</div>
         </div>
       </div>
     </aside>
