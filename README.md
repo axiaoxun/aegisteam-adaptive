@@ -1,6 +1,6 @@
 # AegIsLoop Adaptive
 
-**自适应 AI 安全运营团队** —— 8 个岗位化安全 Agent + 1 个人机协同层,让 1 名安全工程师拥有 7×24 的 SOC 能力。
+**自适应 AI 安全运营团队** —— 8 个岗位化安全 Agent +1 个人机协同层= 7×24自适应 AI 安全运营团队。
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/Version-v1.0.0-blue)](https://github.com/axiaoxun/aegisteam-adaptive/releases/tag/v1.0.0)
@@ -32,12 +32,12 @@ AegIsLoop Adaptive 把真实 SOC 的 8 大岗位抽象成 8 个岗位化 Agent,�
 
 ```
 ┌────────────────────────────────────────────────────────────────────┐
-│                  AegIsLoop Adaptive 5 层架构                        │
-│  L1  Team 编排层  AgentTeams / hiclaw · A0 TeamLeader               │
+│                  AegIsLoop Adaptive 5 层架构                       │
+│  L1  Team 编排层  AgentTeams / hiclaw · A0 TeamLeader              │
 │  L2  Agent 层     8 个岗位化 Agent(A0-A7)                          │
 │  L3  Skill 层     32 个 Skill(编排4/资产4/检测4/漏洞4/              │
 │                    合规4/响应3/质量4/复盘5)                         │
-│  L4  工具层       6 类 MCP + 5 套 RAG(294,440 条)                  │
+│  L4  工具层       6 类 MCP + 5 套 RAG(294,440 条)                   │
 │  L0.5 人机协同层   Web 平台 / IM 通道 双模式                         │
 │  L5  可观测层      16 指标 + 10 区大屏 + Nacos AI Registry          │
 └────────────────────────────────────────────────────────────────────┘
