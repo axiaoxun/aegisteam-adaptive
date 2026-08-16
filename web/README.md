@@ -70,7 +70,7 @@ docker run --rm -p 8080:80 -v "$PWD/web":/usr/share/nginx/html nginx:alpine
 |---|---|---|
 | 1 | Header | A6 Adaptive Engine 健康度 + L0.5 人机协同接入态 + 全局告警计数 |
 | 2 | 8 Agent 拓扑 | TeamLeader (A0) + 7 业务 Worker,实时状态/并发/迭代数 |
-| 3 | Skill 矩阵 | 27 技能按 Agent 分组,显示版本/调用次数/成功率 |
+| 3 | Skill 矩阵 | 32 技能按 Agent 分组,显示版本/调用次数/成功率 |
 | 4 | MCP 工具状态 | 6 类 MCP(mock_cmdb/sbom/siem/vuln_scanner/threat_intel/notify) |
 | 5 | RAG 知识库 | 5 个 KB 容量/命中率/最近更新时间 |
 | 6 | 事件流 | 模拟 SSE,实时显示 Agent 决策/MCP 调用/审批请求 |
@@ -107,7 +107,7 @@ web/
 ├── app.jsx             # React 主组件(10 区布局)
 ├── styles.css          # 自定义样式
 ├── scenarios.js        # 3 场景 + 3 编排流预录剧本
-├── mock_data.js        # 8 Agent + 27 Skill + 6 MCP + 5 RAG 元数据
+├── mock_data.js        # 8 Agent + 32 Skill + 6 MCP + 5 RAG 元数据
 └── README.md
 ```
 

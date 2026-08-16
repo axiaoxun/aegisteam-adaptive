@@ -20,7 +20,7 @@
 | 📺 **演示视频** | (待上传 YouTube/Bilibili 后填入) | 15 分钟,3 编排流回放 |
 | 🖥 **Web Demo 直播** | https://axiaoxun.github.io/aegisteam-adaptive/ | 10 区大屏,点 ▶ 全部播放(需先启用 Pages) |
 | 📄 **方案文档** | [`docs/00-main.md`](docs/00-main.md) | 主文档 V1.2(5000 字) |
-| 🎨 **PPT 草稿** | [`ppt/AegIsLoop-Adaptive-18pages.md`](ppt/AegIsLoop-Adaptive-18pages.md) | 18 页结构化 Markdown |
+| 🎨 **PPT 草稿** | [`ppt/AegIsLoop-Adaptive-19pages.md`](ppt/AegIsLoop-Adaptive-19pages.md) | 19 页结构化 Markdown(对齐官方 template.pptx) |
 
 ---
 
@@ -196,9 +196,9 @@ aegisloop-adaptive/
 │   └── new_regulation.json
 ├── web/                               # Web 端 demo 前端(React + Vite)
 │   └── README.md
-├── ppt/                               # 18 页 PPT
-│   ├── AegIsLoop-Adaptive-18pages.md
-│   └── AegIsLoop-Adaptive-18pages.pdf
+├── ppt/                               # 19 页 PPT
+│   ├── AegIsLoop-Adaptive-19pages.md
+│   └── AegIsLoop-Adaptive-19pages.pdf
 └── scripts/                           # 工具脚本
     └── build_submission.sh            # 压缩包打包脚本
 ```
@@ -375,7 +375,7 @@ PPT 第 8-9 页将明确画出此全链路。
 | 创建脚本 | [at/create_agents_messages.md](at/create_agents_messages.md) | 复制到 Manager |
 | 事故任务 | [at/run_demo_task_message.md](at/run_demo_task_message.md) | 3 条事故 |
 | MCP 映射 | [tools/MCP_MAPPING.md](tools/MCP_MAPPING.md) | Mock → 真实 MCP |
-| 18 页 PPT | [ppt/AegIsLoop-Adaptive-18pages.md](ppt/AegIsLoop-Adaptive-18pages.md) | Markdown 草稿 |
+| 19 页 PPT | [ppt/AegIsLoop-Adaptive-19pages.md](ppt/AegIsLoop-Adaptive-19pages.md) | 严格对齐官方 template.pptx 8 章结构 |
 | Web 端 Demo | [web/](web/) | React + Vite |
 
 ---

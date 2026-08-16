@@ -3,7 +3,7 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # 复制 mock 工具网关代码
-COPY mock_tools.py mock_tool_server.py __init__.py /app/
+COPY tools/mock_tools.py tools/mock_tool_server.py tools/__init__.py /app/
 COPY scenarios/ /app/scenarios/
 
 EXPOSE 18090

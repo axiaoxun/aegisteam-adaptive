@@ -11,17 +11,19 @@
 | 1.1 | 主文档 V1.2 | `docs/00-main.md` | ✅ |
 | 1.2 | 8 Agent + 27 Skill | `docs/01-agents-and-skills.md` | ✅ |
 | 1.3 | 3 编排流 + Mock 剧本 | `docs/02-orchestration.md` | ✅ |
-| 1.4 | 18 页 PPT + GitHub 结构 | `docs/03-presentation-materials.md` | ✅ |
+| 1.4 | 19 页 PPT(对齐官方 template.pptx)+ GitHub 结构 | `docs/03-presentation-materials.md` + `ppt/AegIsLoop-Adaptive-19pages.md` | ✅ |
 | 1.5 | 5 RAG + 6 MCP + 16 指标 | `docs/04-infrastructure.md` | ✅ |
 
 ---
 
-## 2. 18 页 PPT(必交 ✅)
+## 2. 19 页 PPT(对齐官方 template.pptx 必交 ✅)
 
 | # | 检查项 | 状态 |
 |---|---|---|
-| 2.1 | Markdown 草稿 | `ppt/AegIsLoop-Adaptive-18pages.md` ✅ |
-| 2.2 | 渲染为 PDF/PPTX(用户自行操作) | ⏳ 需用 Keynote / PPT 排版后导出 |
+| 2.1 | Markdown 草稿 | `ppt/AegIsLoop-Adaptive-19pages.md` ✅ |
+| 2.2 | 严格对齐 8 章结构(场景/方案/Agent/Skill/工程/开源/进展/团队) | ✅ |
+| 2.3 | 5 大评审维度标注(25/25/25/20/5) | ✅ 右上角 |
+| 2.4 | 渲染为 PDF/PPTX(用户自行操作) | ⏳ 需用 Keynote / PPT 排版后导出 |
 | 2.3 | 含 Nacos 全链路(2 页) | ✅ 第 8-9 页 |
 | 2.4 | 含 5 评审维度自检 | ✅ 第 4 页 |
 | 2.5 | 含 8 Agent 拓扑 | ✅ 第 6 页 |
@@ -41,7 +43,7 @@
 | 3.5 | 含 3 场景 JSON | ✅ |
 | 3.6 | 含 6 类 MCP mock 代码 | ✅ |
 | 3.7 | 含 5 份方案文档 | ✅ |
-| 3.8 | 含 18 页 PPT Markdown(`AegIsLoop-Adaptive-18pages.md`) | ✅ |
+| 3.8 | 含 19 页 PPT Markdown(`AegIsLoop-Adaptive-19pages.md`) | ✅ |
 | 3.9 | 含 Apache 2.0 LICENSE | ✅ |
 | 3.10 | 解压即跑(标准目录结构,内部路径 `aegisloop-adaptive/`) | ✅ |
 
@@ -125,7 +127,7 @@ git push -u origin main
 
 | # | 准备项 | 状态 |
 |---|---|---|
-| 7.1 | 15-20 分钟演讲稿 | ✅ 见 `ppt/AegIsLoop-Adaptive-18pages.md` 演讲节奏 |
+| 7.1 | 15-20 分钟演讲稿 | ✅ 见 `ppt/AegIsLoop-Adaptive-19pages.md` 演讲节奏 |
 | 7.2 | Q&A 高频问题准备 | ✅ 见 PPT 末尾 8 个 Q&A |
 | 7.3 | 演示 Demo 备用方案 | ⏳ curl + Element Web 截图 |
 | 7.4 | 团队成员分工(谁讲哪几页) | ⏳ |

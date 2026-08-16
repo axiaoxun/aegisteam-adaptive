@@ -15,27 +15,43 @@
 
 需要:
 
-- Docker 或兼容运行时。
-- Python 3(用于启动 mock 工具网关)。
-- 一个 AgentTeams 可使用的 LLM API Key。
+- WSL Ubuntu 24.04(已就绪)
+- Docker Desktop(已安装,需启动守护进程)
+- Python 3(用于启动 mock 工具网关;本仓库 `tools/mock_tool_server.py`)
+- 一个 AgentTeams 可使用的 LLM API Key(DeepSeek / Qwen / 阿里云百炼)
 
 检查:
 
 ```bash
-python3 --version
+wsl --status
 docker --version
+python3 --version
 ```
 
-## 2. 启动 Mock 工具网关
+## 2. 启动 Mock 工具网关(WSL 中,Python 方式)
 
-在仓库根目录启动服务,并保持它运行:
+> **主推**:与 baseline opsPilot 教程一致,WSL 自带 Python 3.12,零依赖;后续 AT Worker 通过 `172.18.0.1:18090` 访问。
+
+**必须用 WSL Ubuntu 终端**(不是 Git Bash):开始菜单搜 "Ubuntu" / `wsl` 进。
 
 ```bash
-cd <DEMO_DIR>
+cd /mnt/d/GOAI/infra参赛作品/aegisteam-adaptive
 python3 tools/mock_tool_server.py --host 0.0.0.0 --port 18090
 ```
 
-另开一个终端验证:
+**预期**:
+```
+===============================================
+  AegIsLoop Adaptive Mock Tool Gateway
+  Listening on http://0.0.0.0:18090
+===============================================
+...
+Available:     3 scenarios: alert_brute_force, new_regulation, regulator_notice
+```
+
+**这个终端保持开着!**
+
+**验证**(另开 WSL 终端):
 
 ```bash
 curl http://127.0.0.1:18090/health
@@ -45,90 +61,161 @@ curl -X POST http://127.0.0.1:18090/tools/alert_brute_force/mock_siem.get_alert 
   -d '{"alert_id": "ALERT-2001"}'
 ```
 
-期望输出分别包含:
+期望:
+- `/health` → `{"ok": true, "tools_count": 12}`
+- `/scenarios` → `["alert_brute_force", "new_regulation", "regulator_notice"]`
+- `get_alert` → `severity=CRITICAL score=92.5`
 
-```json
-{"ok": true, "service": "aegisloop-mock-tool-gateway", "version": "0.1.0", "tools_count": 12}
-{"ok": true, "result": ["alert_brute_force", "new_regulation", "regulator_notice"]}
-{"ok": true, "result": {"id": "ALERT-2001", "severity": "CRITICAL", "score": 92.5}}
+**备选 — Docker 方式**(评审机器无 Python 时用):
+
+```bash
+cd /mnt/d/GOAI/infra参赛作品/aegisteam-adaptive
+docker-compose up -d mock-tool-gateway
 ```
 
-这一步只验证宿主机本机访问。后面还需要验证 Docker 容器访问。
+注:Docker 方式在 WSL 路径挂载有兼容性坑(已修 mock_tools.py 路径 bug + Dockerfile COPY 路径),**默认推 Python 方式**。
 
 ## 3. 安装 AgentTeams
 
-执行安装脚本:
+> 本节对齐 [Datawhale 官方教程](../跑通Baseline-拿下第1个赛事作品.md) 的安装方式,使用 **agentscope-ai/AgentTeams** 仓库(非 baseline 文档中的 hiclaw 旧 URL)。
+
+### 3.1 准备环境
+
+- WSL Ubuntu 24.04 已就绪
+- Docker Desktop 已安装(本仓库 mock 工具网关需 Docker)
+- 需一个 LLM API Key(DeepSeek / Qwen / 阿里云百炼均可,本教程以 DeepSeek 为例)
+
+**启动 Docker Desktop**:Windows 任务栏托盘右键 Docker 图标 → Start(如未启动),等左下角变绿。
+
+**验证**:
 
 ```bash
-bash <(curl -sSL https://higress.ai/hiclaw/install.sh)
+wsl --status        # WSL 2
+docker --version    # Docker 28+ / 29+
+docker ps           # 不报错即可
 ```
 
-安装器会引导完成语言、安装模式、版本、LLM、API Key、API 联通性测试、Embedding、Manager/Worker 运行时、端口、域名、E2EE、Docker API 安全代理和共享目录等配置。按引导操作即可,关键是看到模型 API 联通性测试通过。
+### 3.2 启动 Mock 工具网关(本仓库提供,端口 18090)
 
-可参考的 demo 样例:
+在 WSL 中进入本仓库,启动 mock:
 
-| 引导项 | 样例值 |
+```bash
+# 方式 A:Docker 方式(推荐,与 AT Worker 同网络)
+cd /mnt/d/GOAI/infra参赛作品/aegisteam-adaptive
+docker-compose up -d mock-tool-gateway
+docker ps | grep aegisloop
+# 期望看到 aegisloop-mock-tool-gateway 容器,18090 端口已映射
+
+# 方式 B:本机 Python 方式(若 docker 守护进程未起)
+cd /mnt/d/GOAI/infra参赛作品/aegisteam-adaptive
+python3 tools/mock_tool_server.py --host 0.0.0.0 --port 18090
+```
+
+**验证 mock 工作**(另开终端):
+
+```bash
+curl http://127.0.0.1:18090/health
+# 期望:{"ok": true, "service": "aegisloop-mock-tool-gateway", ...}
+
+curl http://127.0.0.1:18090/scenarios
+# 期望:["alert_brute_force", "new_regulation", "regulator_notice"]
+
+curl -X POST http://127.0.0.1:18090/tools/alert_brute_force/mock_siem.get_alert \
+  -H 'Content-Type: application/json' \
+  -d '{"alert_id": "ALERT-2001"}'
+# 期望:{"ok": true, "result": {"id": "ALERT-2001", "severity": "CRITICAL", "score": 92.5, ...}}
+```
+
+### 3.3 安装 AgentTeams
+
+在 WSL 中执行:
+
+```bash
+bash <(curl -sSL https://raw.githubusercontent.com/agentscope-ai/AgentTeams/main/install/agentteams-install.sh)
+```
+
+安装器引导项(以 DeepSeek 为例,可任选 LLM):
+
+| 引导项 | 选择 |
 |---|---|
 | 语言 | 中文 |
-| 版本 | 最新稳定版,例如 `v1.1.2` |
-| LLM | 使用已有 API Key 的模型服务,例如 `qwen3.7-plus` |
-| API 联通性 | 必须测试通过 |
-| Embedding | 可启用;失败后接受自动禁用也可以 |
-| Manager/Worker 运行时 | `qwenpow`(copow / QwenPaw) |
-| Element Web 端口 | 默认 `18088` |
-| Matrix E2EE | 建议禁用 |
-| Docker API 安全代理 | 建议启用 |
-| 共享主机目录 | 可保持默认;本 demo 不依赖共享目录读取文件 |
+| 安装模式 | 快速开始 |
+| 版本 | latest |
+| LLM 供应商 | OpenAI 兼容 API |
+| Base URL | `https://api.deepseek.com/v1` |
+| 默认模型 ID | `deepseek-v4-flash` |
+| 最大上下文长度 | 1000000 |
+| 最大输出长度 | 384000 |
+| 是否支持推理/思考模式 | Y |
+| 是否支持图片输入 | N |
+| LLM API Key | 粘贴你的 Key |
+| 记忆搜索配置 | 3(不启用) |
+| Manager 运行时 | **QwenPaw(CoPaw)** |
+| Worker 运行时 | **QwenPaw(CoPaw)** |
+| 其他 | 默认值回车 |
 
-安装完成后检查:
+**关键**:Manager 和 Worker 运行时**必须选 QwenPaw(CoPaw)**,否则我们的创建脚本会拒绝。
 
-```bash
-docker ps | grep hiclaw
-```
+安装完成后会显示:
 
-打开 Element Web:
+- AgentTeams 已启动
+- Element 或聊天页面地址(本机通常是 `http://127.0.0.1:18088`)
+- 管理员用户名:`admin`
+- 自动生成的管理员密码
 
-```text
-http://<AGENTTEAMS_HOST>:18088
-```
-
-在运行机器本机访问时通常是:
-
-```text
-http://127.0.0.1:18088
-```
-
-## 4. 确定工具网关地址
-
-Worker 在 Docker 容器中运行,不能直接使用 `http://127.0.0.1:18090` 访问宿主机上的 mock 工具网关。单机 Docker 部署优先使用 `hiclaw-manager` 所在网络的 gateway 地址。
-
-先找到 manager 容器名:
+**如果忘记密码**:
 
 ```bash
-docker ps --format '{{.Names}}' | grep manager
+grep '^AGENTTEAMS_ADMIN_PASSWORD=' ~/agentteams-manager.env
 ```
 
-如果容器名是 `hiclaw-manager`,查看 gateway:
+**Element 登录**:
+
+```
+http://127.0.0.1:18088  →  Edit Homeserver → 填入 http://127.0.0.1:18080  →  admin / 密码
+```
+
+## 4. 确定工具网关地址(Docker 容器互通)
+
+> **WSL + Docker Desktop 环境实测结论**:`172.18.0.1`(manager gateway) 指向 Windows Docker Desktop 主机,不指向 WSL(mock 实际跑在 WSL)。**必须用 `host.docker.internal`**,它指向 WSL 真实地址。
+
+**先用 manager 容器验证**(注意容器名是 `agentteams-manager`,不是 `hiclaw-manager`):
 
 ```bash
-docker inspect -f '{{range .NetworkSettings.Networks}}{{println .Gateway}}{{end}}' hiclaw-manager
+# 1. 找 manager 容器名
+docker ps --format '{{.Names}}' | Select-String manager
+# 通常是 agentteams-manager
+
+# 2. 验证 host.docker.internal 通(WSL 场景必须用这个)
+docker exec agentteams-manager curl -s --max-time 5 http://host.docker.internal:18090/health
+# 期望:{"ok": true, "service": "aegisloop-mock-tool-gateway", "version": "0.1.0", "tools_count": 12}
+
+# 3. 验证一个工具调用
+docker exec agentteams-manager curl -s --max-time 5 -X POST http://host.docker.internal:18090/tools/alert_brute_force/mock_siem.get_alert -H "Content-Type: application/json" -d '{"alert_id":"ALERT-2001"}'
+# 期望:返回 ALERT-2001 完整数据(severity=CRITICAL score=92.5)
+
+# 4. 如果上一步不通,试 gateway(早期 Docker Desktop 偶尔能解析)
+docker exec agentteams-manager curl -s --max-time 5 http://172.18.0.1:18090/health
 ```
 
-假设输出是 `172.18.0.1`,则 `<MOCK_TOOL_BASE_URL>` 使用:
+**确定 URL**:
+- 优先 `http://host.docker.internal:18090`
+- 不通则用 `http://172.18.0.1:18090`
 
-```text
-http://172.18.0.1:18090
+**全局替换 `<MOCK_TOOL_BASE_URL>`**:
+
+```powershell
+# Windows PowerShell
+(Get-Content "D:\GOAI\infra参赛作品\aegisteam-adaptive\at\create_agents_messages.md" -Raw) `
+  -replace '<MOCK_TOOL_BASE_URL>', 'http://host.docker.internal:18090' `
+  | Set-Content "D:\GOAI\infra参赛作品\aegisteam-adaptive\at\create_agents_messages.md" -NoNewline
+
+# 验证
+Select-String -Path "D:\GOAI\infra参赛作品\aegisteam-adaptive\at\create_agents_messages.md" -Pattern "host.docker.internal:18090" | Measure-Object | Select-Object -ExpandProperty Count
+# 期望:24(本仓库已统一替换完成)
 ```
 
-从容器内验证:
-
-```bash
-docker exec -it hiclaw-manager curl http://172.18.0.1:18090/health
-```
-
-如果这条命令返回 `{"ok": true, ...}`,说明后续 Worker 可以访问工具网关。
-
-`host.docker.internal` 只在部分 Docker Desktop 环境可用。如果容器里报 `Could not resolve host: host.docker.internal`,就使用上面的 gateway 地址。
+**注意**:`at/create_agents_messages.md` 中 `bash <(curl -sSL ...)` 安装命令是给**评审/复赛**用的,地址需根据实际环境再替换一次。
 
 ## 5. 创建 Agent 和 Team
 

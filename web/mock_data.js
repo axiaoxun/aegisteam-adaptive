@@ -19,7 +19,7 @@ export const AGENTS = [
     role: 'aegisloop-leader',
     type: 'leader',
     desc: '团队编排中枢,AgentLoop 调度(max_iterations=5, max_parallel=3)',
-    skillCount: 6,
+    skillCount: 4,
     color: '#8b5cf6',
   },
   {
@@ -83,53 +83,53 @@ export const AGENTS = [
     role: 'aegisloop-a7',
     type: 'worker',
     desc: '事故复盘 + 知识图谱更新,与 A6 联动',
-    skillCount: 3,
+    skillCount: 5,
     color: '#84cc16',
   },
 ];
 
-// 32 Skill(S01-S32),加 category / p95 / usedIn 字段方便矩阵展示
+// 32 Skill(S01-S32),与 skills/*/SKILL.md 一一对应
 export const SKILLS = [
-  // A0 Leader — 编排
-  { id: 'S01', name: 'incident_routing',     agent: 'A0', category: '编排', version: '1.4.2', calls: 1247, successRate: 0.991, p95: 89,  usedIn: [1, 2, 3] },
-  { id: 'S02', name: 'worker_dispatch',      agent: 'A0', category: '编排', version: '1.3.0', calls: 891,  successRate: 0.987, p95: 67,  usedIn: [1, 2, 3] },
-  { id: 'S03', name: 'evidence_chain',       agent: 'A0', category: '编排', version: '1.2.1', calls: 1102, successRate: 0.995, p95: 124, usedIn: [1, 2, 3] },
-  { id: 'S04', name: 'approval_gate',        agent: 'A0', category: '编排', version: '1.5.0', calls: 234,  successRate: 1.000, p95: 56,  usedIn: [1, 2, 3] },
-  { id: 'S05', name: 'incident_state',       agent: 'A0', category: '编排', version: '1.1.0', calls: 1247, successRate: 0.998, p95: 23,  usedIn: [1, 2, 3] },
-  { id: 'S06', name: 'replan_trigger',       agent: 'A0', category: '编排', version: '1.0.5', calls: 23,   successRate: 0.957, p95: 198, usedIn: [2, 3] },
-  // A1 资产 — 资产
-  { id: 'S07', name: 'asset_query',          agent: 'A1', category: '资产', version: '2.1.0', calls: 3421, successRate: 0.994, p95: 45,  usedIn: [1, 2, 3] },
-  { id: 'S08', name: 'sbom_query',           agent: 'A1', category: '资产', version: '2.0.3', calls: 1893, successRate: 0.991, p95: 78,  usedIn: [1] },
-  { id: 'S09', name: 'vuln_to_asset',        agent: 'A1', category: '资产', version: '1.5.2', calls: 2104, successRate: 0.985, p95: 67,  usedIn: [1, 2] },
-  { id: 'S10', name: 'asset_criticality',    agent: 'A1', category: '资产', version: '1.2.0', calls: 1567, successRate: 0.992, p95: 34,  usedIn: [2] },
-  // A2 检测 — 检测
-  { id: 'S11', name: 'alert_fusion',         agent: 'A2', category: '检测', version: '1.7.1', calls: 2891, successRate: 0.978, p95: 156, usedIn: [1] },
-  { id: 'S12', name: 'impact_mapping',       agent: 'A2', category: '检测', version: '1.4.0', calls: 1203, successRate: 0.983, p95: 89,  usedIn: [1, 2] },
-  { id: 'S13', name: 'ioc_enrichment',       agent: 'A2', category: '检测', version: '1.6.2', calls: 3456, successRate: 0.989, p95: 112, usedIn: [1] },
-  { id: 'S14', name: 'attack_pattern',       agent: 'A2', category: '检测', version: '1.3.5', calls: 892,  successRate: 0.975, p95: 234, usedIn: [1] },
-  // A3 漏洞 — 漏洞
-  { id: 'S15', name: 'vuln_scan',            agent: 'A3', category: '漏洞', version: '2.2.0', calls: 1678, successRate: 0.992, p95: 567, usedIn: [1, 3] },
-  { id: 'S16', name: 'cve_lookup',           agent: 'A3', category: '漏洞', version: '1.8.0', calls: 2456, successRate: 0.996, p95: 134, usedIn: [1, 3] },
-  { id: 'S17', name: 'evidence_integrity',   agent: 'A3', category: '漏洞', version: '1.1.0', calls: 567,  successRate: 1.000, p95: 89,  usedIn: [1] },
-  { id: 'S18', name: 'fix_advisor',          agent: 'A3', category: '漏洞', version: '1.5.0', calls: 1102, successRate: 0.981, p95: 178, usedIn: [1, 3] },
-  // A4 合规 — 合规
-  { id: 'S19', name: 'compliance_lookup',    agent: 'A4', category: '合规', version: '1.9.1', calls: 1834, successRate: 0.994, p95: 67,  usedIn: [2, 3] },
-  { id: 'S20', name: 'regulation_diff',      agent: 'A4', category: '合规', version: '1.4.0', calls: 423,  successRate: 0.979, p95: 234, usedIn: [3] },
-  { id: 'S21', name: 'pia_assessment',       agent: 'A4', category: '合规', version: '1.2.0', calls: 234,  successRate: 0.987, p95: 345, usedIn: [2, 3] },
-  { id: 'S22', name: 'approval_routing',     agent: 'A4', category: '合规', version: '1.6.0', calls: 567,  successRate: 0.991, p95: 78,  usedIn: [1, 2, 3] },
-  // A5 响应 — 响应
-  { id: 'S23', name: 'remediation_plan',     agent: 'A5', category: '响应', version: '1.5.0', calls: 678,  successRate: 0.978, p95: 234, usedIn: [1, 2, 3] },
-  { id: 'S24', name: 'risk_guard',           agent: 'A5', category: '响应', version: '1.3.2', calls: 892,  successRate: 0.995, p95: 45,  usedIn: [1, 2, 3] },
-  { id: 'S25', name: 'l1_auto_execute',      agent: 'A5', category: '响应', version: '1.1.0', calls: 234,  successRate: 0.991, p95: 567, usedIn: [1, 2] },
-  // A6 质量 — 质量(4 个新)
-  { id: 'S26', name: 'output_quality',       agent: 'A6', category: '质量', version: '1.0.0', calls: 1834, successRate: 0.992, p95: 89,  usedIn: [1, 2, 3], isNew: true },
-  { id: 'S27', name: 'drift_detection',      agent: 'A6', category: '质量', version: '1.0.0', calls: 567,  successRate: 0.984, p95: 234, usedIn: [1, 2],     isNew: true },
-  { id: 'S28', name: 'rag_health',           agent: 'A6', category: '质量', version: '1.0.0', calls: 234,  successRate: 0.997, p95: 178, usedIn: [3],          isNew: true },
-  { id: 'S29', name: 'adaptive_feedback',    agent: 'A6', category: '质量', version: '1.0.0', calls: 89,   successRate: 0.978, p95: 312, usedIn: [2],          isNew: true },
-  // A7 复盘
-  { id: 'S30', name: 'postmortem_writer',    agent: 'A7', category: '复盘', version: '1.0.0', calls: 24,   successRate: 1.000, p95: 567, usedIn: [1, 2] },
-  { id: 'S31', name: 'kb_update',            agent: 'A7', category: '复盘', version: '1.0.0', calls: 18,   successRate: 0.944, p95: 789, usedIn: [2] },
-  { id: 'S32', name: 'pattern_extract',      agent: 'A7', category: '复盘', version: '1.0.0', calls: 12,   successRate: 1.000, p95: 432, usedIn: [1] },
+  // A0 Leader — 编排(4)
+  { id: 'S01', name: 'incident_routing',     agent: 'A0', category: '编排', version: '1.1.0', calls: 1247, successRate: 0.991, p95: 89,  usedIn: [1, 2, 3] },
+  { id: 'S02', name: 'worker_dispatch',      agent: 'A0', category: '编排', version: '1.2.0', calls: 891,  successRate: 0.987, p95: 67,  usedIn: [1, 2, 3] },
+  { id: 'S03', name: 'evidence_chain',       agent: 'A0', category: '编排', version: '1.1.0', calls: 1102, successRate: 0.995, p95: 124, usedIn: [1, 2, 3] },
+  { id: 'S04', name: 'approval_gate',        agent: 'A0', category: '编排', version: '1.0.0', calls: 234,  successRate: 1.000, p95: 56,  usedIn: [1, 2, 3] },
+  // A1 资产 — 资产(4)
+  { id: 'S05', name: 'asset_query',          agent: 'A1', category: '资产', version: '1.2.0', calls: 3421, successRate: 0.994, p95: 45,  usedIn: [1, 2, 3] },
+  { id: 'S06', name: 'sbom_query',           agent: 'A1', category: '资产', version: '1.1.0', calls: 1893, successRate: 0.991, p95: 78,  usedIn: [1] },
+  { id: 'S07', name: 'vuln_to_asset',        agent: 'A1', category: '资产', version: '1.3.0', calls: 2104, successRate: 0.985, p95: 67,  usedIn: [1, 2] },
+  { id: 'S08', name: 'asset_criticality',    agent: 'A1', category: '资产', version: '1.0.0', calls: 1567, successRate: 0.992, p95: 34,  usedIn: [2] },
+  // A2 检测 — 检测(4)
+  { id: 'S09', name: 'alert_fusion',         agent: 'A2', category: '检测', version: '1.2.0', calls: 2891, successRate: 0.978, p95: 156, usedIn: [1] },
+  { id: 'S10', name: 'impact_mapping',       agent: 'A2', category: '检测', version: '1.1.0', calls: 1203, successRate: 0.983, p95: 89,  usedIn: [1, 2] },
+  { id: 'S11', name: 'ioc_enrichment',       agent: 'A2', category: '检测', version: '1.2.0', calls: 3456, successRate: 0.989, p95: 112, usedIn: [1] },
+  { id: 'S12', name: 'attack_pattern',       agent: 'A2', category: '检测', version: '1.3.0', calls: 892,  successRate: 0.975, p95: 234, usedIn: [1] },
+  // A3 漏洞 — 漏洞(4)
+  { id: 'S13', name: 'vuln_scan',            agent: 'A3', category: '漏洞', version: '1.1.0', calls: 1678, successRate: 0.992, p95: 567, usedIn: [1, 3] },
+  { id: 'S14', name: 'cve_lookup',           agent: 'A3', category: '漏洞', version: '1.2.0', calls: 2456, successRate: 0.996, p95: 134, usedIn: [1, 3] },
+  { id: 'S15', name: 'evidence_integrity',   agent: 'A3', category: '漏洞', version: '1.0.0', calls: 567,  successRate: 1.000, p95: 89,  usedIn: [1] },
+  { id: 'S16', name: 'fix_advisor',          agent: 'A3', category: '漏洞', version: '1.0.0', calls: 1102, successRate: 0.981, p95: 178, usedIn: [1, 3] },
+  // A4 合规 — 合规(4)
+  { id: 'S17', name: 'compliance_lookup',    agent: 'A4', category: '合规', version: '1.2.0', calls: 1834, successRate: 0.994, p95: 67,  usedIn: [2, 3] },
+  { id: 'S18', name: 'regulation_diff',      agent: 'A4', category: '合规', version: '1.1.0', calls: 423,  successRate: 0.979, p95: 234, usedIn: [3] },
+  { id: 'S19', name: 'pia_assessment',       agent: 'A4', category: '合规', version: '1.0.0', calls: 234,  successRate: 0.987, p95: 345, usedIn: [2, 3] },
+  { id: 'S20', name: 'approval_routing',     agent: 'A4', category: '合规', version: '1.0.0', calls: 567,  successRate: 0.991, p95: 78,  usedIn: [1, 2, 3] },
+  // A5 响应 — 响应(3)
+  { id: 'S21', name: 'remediation_plan',     agent: 'A5', category: '响应', version: '1.3.0', calls: 678,  successRate: 0.978, p95: 234, usedIn: [1, 2, 3] },
+  { id: 'S22', name: 'risk_guard',           agent: 'A5', category: '响应', version: '1.2.0', calls: 892,  successRate: 0.995, p95: 45,  usedIn: [1, 2, 3] },
+  { id: 'S23', name: 'l1_auto_execute',      agent: 'A5', category: '响应', version: '1.1.0', calls: 234,  successRate: 0.991, p95: 567, usedIn: [1, 2] },
+  // A6 质量 — 质量(4 个自适应新 Skill)
+  { id: 'S24', name: 'output_quality',       agent: 'A6', category: '质量', version: '1.1.0', calls: 1834, successRate: 0.992, p95: 89,  usedIn: [1, 2, 3], isNew: true },
+  { id: 'S25', name: 'drift_detection',      agent: 'A6', category: '质量', version: '1.1.0', calls: 567,  successRate: 0.984, p95: 234, usedIn: [1, 2],     isNew: true },
+  { id: 'S26', name: 'rag_health',           agent: 'A6', category: '质量', version: '1.0.0', calls: 234,  successRate: 0.997, p95: 178, usedIn: [3],          isNew: true },
+  { id: 'S27', name: 'adaptive_feedback',    agent: 'A6', category: '质量', version: '1.2.0', calls: 89,   successRate: 0.978, p95: 312, usedIn: [2],          isNew: true },
+  // A7 复盘 — 复盘(5)
+  { id: 'S28', name: 'postmortem_gen',       agent: 'A7', category: '复盘', version: '1.0.0', calls: 24,   successRate: 1.000, p95: 567, usedIn: [1, 2] },
+  { id: 'S29', name: 'rag_rewind',           agent: 'A7', category: '复盘', version: '1.0.0', calls: 18,   successRate: 0.944, p95: 789, usedIn: [2] },
+  { id: 'S30', name: 'lesson_extraction',    agent: 'A7', category: '复盘', version: '1.0.0', calls: 12,   successRate: 1.000, p95: 432, usedIn: [1] },
+  { id: 'S31', name: 'improvement_tracking', agent: 'A7', category: '复盘', version: '1.0.0', calls: 21,   successRate: 0.976, p95: 345, usedIn: [1, 2, 3] },
+  { id: 'S32', name: 'runbook_update',       agent: 'A7', category: '复盘', version: '1.0.0', calls: 9,    successRate: 1.000, p95: 678, usedIn: [1, 2] },
 ];
 
 export const MCP_TOOLS = [

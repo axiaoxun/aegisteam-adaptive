@@ -42,137 +42,137 @@
         "description": "H1 事实确认 + H2 执行审批,根据风险分级路由到人机协同层"
       },
       {
-        "name": "s05_remediation_plan",
-        "version": "v1.3.0",
-        "owner_agent": "a5_incident_responder",
-        "tag": "stable",
-        "description": "生成修复步骤、验证步骤和回滚步骤"
-      },
-      {
-        "name": "s06_risk_guard",
-        "version": "v1.2.0",
-        "owner_agent": "a5_incident_responder",
-        "tag": "stable",
-        "description": "按风险等级判断是否允许自动执行"
-      },
-      {
-        "name": "s07_asset_query",
+        "name": "s05_asset_query",
         "version": "v1.2.0",
         "owner_agent": "a1_asset_manager",
         "tag": "stable",
-        "description": "按多条件查询资产"
+        "description": "按多条件查询资产(ip / 类型 / 合规范围 / 关键度 / 标签),支持 5 分钟缓存"
       },
       {
-        "name": "s08_sbom_query",
+        "name": "s06_sbom_query",
         "version": "v1.1.0",
         "owner_agent": "a1_asset_manager",
         "tag": "stable",
         "description": "拉取 SBOM 组件列表"
       },
       {
-        "name": "s09_vuln_to_asset",
+        "name": "s07_vuln_to_asset",
         "version": "v1.3.0",
         "owner_agent": "a1_asset_manager",
         "tag": "stable",
         "description": "关联组件漏洞到具体资产"
       },
       {
-        "name": "s10_asset_criticality",
+        "name": "s08_asset_criticality",
         "version": "v1.0.0",
         "owner_agent": "a1_asset_manager",
         "tag": "stable",
         "description": "评估资产关键度"
       },
       {
-        "name": "s11_alert_fusion",
+        "name": "s09_alert_fusion",
         "version": "v1.2.0",
         "owner_agent": "a2_threat_detector",
         "tag": "stable",
         "description": "按服务/时间窗口/症状聚合告警"
       },
       {
-        "name": "s12_impact_mapping",
+        "name": "s10_impact_mapping",
         "version": "v1.1.0",
         "owner_agent": "a2_threat_detector",
         "tag": "stable",
         "description": "推断影响服务、接口、用户动作、业务影响"
       },
       {
-        "name": "s13_ioc_enrichment",
+        "name": "s11_ioc_enrichment",
         "version": "v1.2.0",
         "owner_agent": "a2_threat_detector",
         "tag": "stable",
         "description": "威胁情报富化"
       },
       {
-        "name": "s14_attack_pattern",
+        "name": "s12_attack_pattern",
         "version": "v1.3.0",
         "owner_agent": "a2_threat_detector",
         "tag": "stable",
         "description": "识别 8 类攻击模式"
       },
       {
-        "name": "s15_l1_block_action",
-        "version": "v1.1.0",
-        "owner_agent": "a2_threat_detector",
-        "tag": "stable",
-        "description": "L1 阻断动作(需 A0 串行确认)"
-      },
-      {
-        "name": "s16_vuln_scan",
+        "name": "s13_vuln_scan",
         "version": "v1.1.0",
         "owner_agent": "a3_vuln_verifier",
         "tag": "stable",
         "description": "调用漏洞扫描器"
       },
       {
-        "name": "s17_cve_lookup",
+        "name": "s14_cve_lookup",
         "version": "v1.2.0",
         "owner_agent": "a3_vuln_verifier",
         "tag": "stable",
         "description": "查询 CVE 详情"
       },
       {
-        "name": "s18_evidence_integrity",
+        "name": "s15_evidence_integrity",
         "version": "v1.0.0",
         "owner_agent": "a3_vuln_verifier",
         "tag": "stable",
         "description": "证据链完整性校验"
       },
       {
-        "name": "s19_fix_advisor",
+        "name": "s16_fix_advisor",
         "version": "v1.0.0",
         "owner_agent": "a3_vuln_verifier",
         "tag": "stable",
         "description": "推荐修复版本、补丁、回滚方案"
       },
       {
-        "name": "s20_compliance_lookup",
+        "name": "s17_compliance_lookup",
         "version": "v1.2.0",
         "owner_agent": "a4_compliance_guard",
         "tag": "stable",
         "description": "检索法规库"
       },
       {
-        "name": "s21_regulation_diff",
+        "name": "s18_regulation_diff",
         "version": "v1.1.0",
         "owner_agent": "a4_compliance_guard",
         "tag": "stable",
         "description": "解析新法规要求"
       },
       {
-        "name": "s22_pia_assessment",
+        "name": "s19_pia_assessment",
         "version": "v1.0.0",
         "owner_agent": "a4_compliance_guard",
         "tag": "stable",
         "description": "PIA 模板生成"
       },
       {
-        "name": "s23_approval_routing",
+        "name": "s20_approval_routing",
         "version": "v1.0.0",
         "owner_agent": "a4_compliance_guard",
         "tag": "stable",
         "description": "决定审批路由"
+      },
+      {
+        "name": "s21_remediation_plan",
+        "version": "v1.3.0",
+        "owner_agent": "a5_incident_responder",
+        "tag": "stable",
+        "description": "生成修复步骤、验证步骤、回滚点"
+      },
+      {
+        "name": "s22_risk_guard",
+        "version": "v1.2.0",
+        "owner_agent": "a5_incident_responder",
+        "tag": "stable",
+        "description": "按风险等级(L0-L3)判断是否允许自动执行,校验不可自动化清单"
+      },
+      {
+        "name": "s23_l1_auto_execute",
+        "version": "v1.1.0",
+        "owner_agent": "a5_incident_responder",
+        "tag": "stable",
+        "description": "执行 L1 低风险阻断动作(阻断 IP / 禁用默认账户 / 关闭告警),需 A0 Leader 串行确认"
       },
       {
         "name": "s24_output_quality",
@@ -229,6 +229,13 @@
         "owner_agent": "a7_knowledge_weaver",
         "tag": "stable",
         "description": "跟踪改进项,与 A6 自适应反馈联动"
+      },
+      {
+        "name": "s32_runbook_update",
+        "version": "v1.0.0",
+        "owner_agent": "a7_knowledge_weaver",
+        "tag": "stable",
+        "description": "基于复盘报告生成/更新 KB-Runbook 标准化处置流程"
       }
     ]
   },

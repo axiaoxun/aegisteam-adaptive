@@ -108,9 +108,9 @@ fi
 AGENT_COUNT=$(find "$STAGING_DIR/agents" -name "Agent.md" | wc -l)
 SKILL_COUNT=$(find "$STAGING_DIR/skills" -name "SKILL.md" | wc -l)
 echo "  - AgentSpec 数: $AGENT_COUNT (期望 8)"
-echo "  - SKILL.md 数: $SKILL_COUNT (期望 27)"
+echo "  - SKILL.md 数: $SKILL_COUNT (期望 32)"
 
-if [ $AGENT_COUNT -ne 8 ] || [ $SKILL_COUNT -ne 27 ]; then
+if [ $AGENT_COUNT -ne 8 ] || [ $SKILL_COUNT -ne 32 ]; then
   echo "  ❌ 数量不对,中止"
   rm -rf "$STAGING_DIR"
   exit 1

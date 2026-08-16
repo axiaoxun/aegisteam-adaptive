@@ -31,8 +31,18 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-SCENARIO_DIR = PROJECT_ROOT / "scenarios"
+PROJECT_ROOT = Path(__file__).resolve().parent
+# 自动探测 scenarios 目录:同时支持两种部署
+#   - WSL/原生:mock_tools.py 在 tools/ 下,scenarios 在项目根(tools/ 的父目录)
+#   - Docker:  mock_tools.py 在 /app/,scenarios 在 /app/scenarios
+_SCENARIO_CANDIDATES = [
+    PROJECT_ROOT / "scenarios",                # Docker (/app/scenarios)
+    PROJECT_ROOT.parent / "scenarios",         # WSL 原生 (<root>/scenarios)
+]
+SCENARIO_DIR = next(
+    (p for p in _SCENARIO_CANDIDATES if p.is_dir() and any(p.glob("*.json"))),
+    _SCENARIO_CANDIDATES[1],  # 兜底用 WSL 路径
+)
 
 
 def load_json(path: Path) -> Dict[str, Any]:

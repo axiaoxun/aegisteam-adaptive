@@ -2,16 +2,16 @@
 
 AgentTeams 启动后,把下面这一整段消息复制到 `manager` 房间发送一次即可。消息内已经包含 7 个业务 Worker 和 1 个 Team 的完整定义;TeamLeader 由 manager 在创建 Team 时创建为独立 Worker `aegisloop-leader`(对应 a0_leader 角色)。
 
-发送前请先按 [AGENTTEAMS_RUNBOOK.md](AGENTTEAMS_RUNBOOK.md) 确认 Worker 可访问的工具网关地址,然后把所有 `<MOCK_TOOL_BASE_URL>` 替换为该地址,例如:
+发送前请先按 [AGENTTEAMS_RUNBOOK.md](AGENTTEAMS_RUNBOOK.md) 确认 Worker 可访问的工具网关地址,然后把所有 `http://host.docker.internal:18090` 替换为该地址,本仓库已统一替换为:
 
 ```text
-http://172.18.0.1:18090
+http://host.docker.internal:18090
 ```
 
 统一工具调用协议:
 
 ```text
-POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/{tool_name}.{function_name}
+POST http://host.docker.internal:18090/tools/{scenario_id}/{tool_name}.{function_name}
 Content-Type: application/json
 ```
 
@@ -32,11 +32,11 @@ Content-Type: application/json
 7. 必须等 7 个业务 Worker 全部创建完成并确认正常运行后,才允许创建 aegisloop-adaptive Team。
 8. Worker 初始化可能拉起容器运行时并写入依赖;并行创建会造成高 I/O 消耗,低规格机器可能因此阻塞,所以不要为了提速而并行执行。
 9. 7 个业务 Worker 的 AgentSpec、Skill、工具契约都在本消息中内联,不依赖 Worker 读取宿主机目录中的文件。
-10. 所有工具数据都通过 HTTP mock 工具网关获取,基础地址为 <MOCK_TOOL_BASE_URL>。
+10. 所有工具数据都通过 HTTP mock 工具网关获取,基础地址为 http://host.docker.internal:18090。
 11. Skill 内联说明在每个 Worker 的 AgentSpec 中;初赛阶段不依赖 Nacos Registry,Worker 直接按内联 prompt 行为。
 
 统一工具调用协议:
-POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/{tool_name}.{function_name}
+POST http://host.docker.internal:18090/tools/{scenario_id}/{tool_name}.{function_name}
 Content-Type: application/json
 
 ============================================================
@@ -71,10 +71,10 @@ skills:
 - s09_vuln_to_asset: 关联组件漏洞到具体资产
 - s10_asset_criticality: 评估资产关键度
 tool contracts:
-- mock_cmdb.get_asset: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_cmdb.get_asset body {"asset_id":""}
-- mock_cmdb.list_assets: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_cmdb.list_assets body {"filter":{}}
-- mock_sbom.get_components: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_sbom.get_components body {"asset_id":""}
-- mock_sbom.scan_vulnerabilities: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_sbom.scan_vulnerabilities body {"asset_id":""}
+- mock_cmdb.get_asset: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_cmdb.get_asset body {"asset_id":""}
+- mock_cmdb.list_assets: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_cmdb.list_assets body {"filter":{}}
+- mock_sbom.get_components: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_sbom.get_components body {"asset_id":""}
+- mock_sbom.scan_vulnerabilities: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_sbom.scan_vulnerabilities body {"asset_id":""}
 output contract:
 {
   "asset_profile": {
@@ -124,10 +124,10 @@ skills:
 - s14_attack_pattern: 识别 8 类攻击模式
 - s15_l1_block_action: 低风险阻断,需 A0 Leader 串行确认
 tool contracts:
-- mock_siem.search_events: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_siem.search_events body {"query":null,"time_range":null}
-- mock_siem.get_alert: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_siem.get_alert body {"alert_id":""}
-- mock_threat_intel.query_ioc: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_threat_intel.query_ioc body {"ioc_type":"ip","value":""}
-- mock_threat_intel.lookup_malware: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_threat_intel.lookup_malware body {"family":""}
+- mock_siem.search_events: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_siem.search_events body {"query":null,"time_range":null}
+- mock_siem.get_alert: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_siem.get_alert body {"alert_id":""}
+- mock_threat_intel.query_ioc: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_threat_intel.query_ioc body {"ioc_type":"ip","value":""}
+- mock_threat_intel.lookup_malware: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_threat_intel.lookup_malware body {"family":""}
 output contract:
 {
   "incident_candidate": {
@@ -176,9 +176,9 @@ skills:
 - s18_evidence_integrity: 证据链完整性校验
 - s19_fix_advisor: 推荐修复版本、补丁、回滚方案
 tool contracts:
-- mock_vuln_scanner.scan_target: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_vuln_scanner.scan_target body {"target":"","scan_type":"full"}
-- mock_vuln_scanner.get_cve_info: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_vuln_scanner.get_cve_info body {"cve_id":""}
-- mock_sbom.get_components: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_sbom.get_components body {"asset_id":""}
+- mock_vuln_scanner.scan_target: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_vuln_scanner.scan_target body {"target":"","scan_type":"full"}
+- mock_vuln_scanner.get_cve_info: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_vuln_scanner.get_cve_info body {"cve_id":""}
+- mock_sbom.get_components: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_sbom.get_components body {"asset_id":""}
 output contract:
 {
   "vuln_verification": {
@@ -232,10 +232,10 @@ skills:
 - s22_pia_assessment: PIA 模板生成
 - s23_approval_routing: 决定审批路由
 tool contracts:
-- mock_cmdb.get_asset: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_cmdb.get_asset body {"asset_id":""}
-- mock_cmdb.list_assets: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_cmdb.list_assets body {"filter":{}}
-- mock_sbom.scan_vulnerabilities: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_sbom.scan_vulnerabilities body {"asset_id":""}
-- mock_notify.send_message: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_notify.send_message body {"channel":"dingtalk","target":"","message":{}}
+- mock_cmdb.get_asset: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_cmdb.get_asset body {"asset_id":""}
+- mock_cmdb.list_assets: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_cmdb.list_assets body {"filter":{}}
+- mock_sbom.scan_vulnerabilities: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_sbom.scan_vulnerabilities body {"asset_id":""}
+- mock_notify.send_message: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_notify.send_message body {"channel":"dingtalk","target":"","message":{}}
 output contract:
 {
   "compliance_report": {
@@ -286,9 +286,9 @@ skills:
 - s25_l1_auto_execute: L1 自动执行(需 A0 串行确认)
 - s26_approval_plan: L2/L3 审批计划生成
 tool contracts:
-- mock_notify.send_message: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_notify.send_message body {"channel":"","target":"","message":{}}
-- mock_notify.list_channels: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_notify.list_channels body {}
-- mock_siem.search_events: POST <MOCK_TOOL_BASE_URL>/tools/{scenario_id}/mock_siem.search_events body {"query":null,"time_range":null}
+- mock_notify.send_message: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_notify.send_message body {"channel":"","target":"","message":{}}
+- mock_notify.list_channels: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_notify.list_channels body {}
+- mock_siem.search_events: POST http://host.docker.internal:18090/tools/{scenario_id}/mock_siem.search_events body {"query":null,"time_range":null}
 output contract:
 {
   "remediation_plan": {
@@ -456,7 +456,7 @@ risk_authority: ["L0", "L1", "L2", "L3"]  # 可派发任何风险级别动作,�
 - 使用 AgentTeams 当前配置的真实 LLM 完成推理和协作。
 - manager 只负责创建和管理;事故任务由 aegisloop-adaptive 对应的 Team 房间接收,用户需要在消息开头 @<team_leader_name>,该 mention 应指向 aegisloop-leader。
 - 7 个业务 Worker 的 AgentSpec、Skill、工具契约都已在本消息中内联,不依赖 Worker 读取宿主机文件。
-- 所有工具数据通过 HTTP mock 工具网关获取,基础地址为 <MOCK_TOOL_BASE_URL>。
+- 所有工具数据通过 HTTP mock 工具网关获取,基础地址为 http://host.docker.internal:18090。
 - 收到事故任务后,由 TeamLeader 调度以下业务 Worker 协作(3 条编排流):
   Flow 1 告警流(alert_brute_force):alert-intake(a1 资产 -> a2 告警 -> a3 漏洞 -> a5 响应)+ a6 质量治理
   Flow 2 监管通报流(regulator_notice):a1 资产 -> a3 漏洞 -> a4 合规 -> a5 响应 + a6 质量治理
