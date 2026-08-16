@@ -2,43 +2,59 @@
 
 10 区大屏,展示 8 Agent + 27 Skill + 6 MCP + 5 RAG + 3 编排流 + A6 Adaptive 引擎 + L0.5 人机协同。
 
-## 运行方式(无需 Node)
+## 运行方式
 
-### 方案 A:直接双击 `index.html`
+### ⚠️ 重要:必须用 HTTP 服务器(不能直接双击 index.html)
 
-```bash
-# Windows
-start web/index.html
+`file://` 协议下浏览器拒绝 ES module 加载,会一片空白。
 
-# macOS
-open web/index.html
-```
-
-**注意**:直接打开会因为 `file://` 协议禁止 ES module 加载,需要走方案 B。
-
-### 方案 B:本地静态服务器(推荐)
+### 方案 1(推荐):零依赖 Node 服务器
 
 ```bash
-# Python 3
-cd web && python3 -m http.server 8080
-
-# Python 2
-cd web && python -m SimpleHTTPServer 8080
-
-# Node (如果装了)
-cd web && npx serve -p 8080
-
-# PowerShell
-cd web; python -m http.server 8080
+# 项目根目录
+node web/serve.js
+# 或指定端口
+node web/serve.js 8888
 ```
 
-浏览器访问 `http://localhost:8080`。
+要求:Node.js ≥ 14(无需任何 npm 包,只用了内置 http/fs/path)。
 
-### 方案 C:Docker
+### 方案 2:Python(常见坑:Microsoft Store 桩)
 
 ```bash
-docker run -p 8080:80 -v "$PWD":/usr/share/nginx/html nginx:alpine
+cd web && python -m http.server 8080
 ```
+
+**注意**:Windows 上 `python3` 经常被 Microsoft Store 桩劫持,报 "Python was not found" 但实际未启动。解决办法:
+- 用 `python` 而不是 `python3`
+- 或去「设置 → 应用 → 高级应用设置 → 应用执行别名」关掉 python.exe / python3.exe 桩
+
+### 方案 3:npx serve(需联网)
+
+```bash
+npx serve web -p 8080
+```
+
+### 方案 4:PowerShell(不推荐,功能有限)
+
+```bash
+cd web && powershell -Command "(Invoke-WebRequest -Uri 'http://localhost:8080/' -UseBasicParsing).Content"
+```
+(注:PowerShell 自带 WebListener 较复杂,推荐用方案 1)
+
+### 方案 5:Docker
+
+```bash
+docker run --rm -p 8080:80 -v "$PWD/web":/usr/share/nginx/html nginx:alpine
+```
+
+## 验证启动成功
+
+打开 `http://localhost:8080/`,应看到:
+- 黑色背景的 10 区作战大屏
+- 顶部:「AegisTeam Adaptive」标题 + A6 自适应 94%
+- 中部:8 个 Agent 卡片(A0 紫色,带 ADAPTIVE 徽章)
+- 点 ▶ 播放按钮 → 事件流区域开始滚动
 
 ## 技术栈
 
