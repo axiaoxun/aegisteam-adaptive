@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AegIsLoop Adaptive — 10 区作战大屏</title>
+
+  <!-- Tailwind Play CDN(开发模式,无 build step) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'aegis-bg': '#0a0e1a',
+            'aegis-card': '#111827',
+            'aegis-border': '#1f2937',
+            'aegis-accent': '#3b82f6',
+            'aegis-green': '#10b981',
+            'aegis-amber': '#f59e0b',
+            'aegis-red': '#ef4444',
+            'aegis-purple': '#8b5cf6',
+          },
+          fontFamily: {
+            'mono': ['JetBrains Mono', 'Consolas', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- React 18 ESM -->
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://esm.sh/react@18.3.1",
+      "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+      "htm": "https://esm.sh/htm@3.1.1"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body class="bg-aegis-bg text-gray-200 font-sans antialiased">
+  <div id="root"></div>
+  <script type="module" src="./app.jsx"></script>
+</body>
+</html>
