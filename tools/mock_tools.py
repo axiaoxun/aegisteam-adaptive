@@ -1,6 +1,6 @@
-"""AegisTeam Adaptive mock tool gateway tools.
+"""AegIsLoop Adaptive mock tool gateway tools.
 
-AegisTeam 自适应安全运营平台的 HTTP mock 工具网关实现。
+AegIsLoop 自适应安全运营平台的 HTTP mock 工具网关实现。
 参考 baseline 模式,但工具集针对安全运营场景重新设计。
 
 6 类 MCP 工具:

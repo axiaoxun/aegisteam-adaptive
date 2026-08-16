@@ -1,6 +1,6 @@
-# AegisTeam Adaptive · 对外展示材料
+# AegIsLoop Adaptive · 对外展示材料
 
-> 项目名:AegisTeam Adaptive(自适应盾牌防御团队)
+> 项目名:AegIsLoop Adaptive(AegIsLoop 自适应 AI 安全运营)
 > 赛道:GOAI World AI 开源大赛 · 赛道一·新智基座·Agent Infra
 > 主题:Cybersecurity + AI
 > 文档版本:v1.1(2026-08-16)
@@ -12,7 +12,7 @@
 
 ### Page 01 — 封面
 - **核心内容**
-  - 标题:AegisTeam Adaptive · 自适应盾牌防御团队
+  - 标题:AegIsLoop Adaptive · AegIsLoop 自适应 AI 安全运营
   - 副标题:8 个岗位化 Agent + 1 个灵活的人机协同层 = 1 支自适应增强的安全运营团队
   - 参赛信息:GOAI 2026 · 赛道一·新智基座·Agent Infra
   - 团队 logo + 成员 + 提交日期
@@ -56,7 +56,7 @@
 
 ### Page 05 — 现有方案为什么不够
 - **核心内容**
-  - 对照表:维度 / 传统 SIEM / OpsPilot Zero / 通报整改白皮书 / **AegisTeam Adaptive**
+  - 对照表:维度 / 传统 SIEM / OpsPilot Zero / 通报整改白皮书 / **AegIsLoop Adaptive**
   - 关键短板:流水线式 8 节点 ≠ 真实岗位 / 无 Skill 抽象 / MCP+RAG 单薄
   - 关键差异:团队岗位化 + Skill 复用 + 4 级分级 + 全栈开源
   - 强调:不做"又一个 SOC 平台",做"一支 7×24 的数字 SOC 团队"
@@ -244,7 +244,7 @@
 
 > **字数控验**:中文标准计字法(汉字 + 英文单词 + 标点 = 1 字),**实测严格 500 字**(Node.js 脚本验证)。
 
-AegisTeam Adaptive(自适应盾牌防御团队)面向中小单位,核心理念是"8 个岗位化 Agent + 1 个灵活的人机协同层 = 1 支自适应增强的安全运营团队"。
+AegIsLoop Adaptive(AegIsLoop 自适应 AI 安全运营)面向中小单位,核心理念是"8 个岗位化 Agent + 1 个灵活的人机协同层 = 1 支自适应增强的安全运营团队"。
 
 **痛点**:80% 中小单位年安全预算 < 50 万、专职安全 < 3 人,雇不起 50 人 SOC;叠加等保 2.0、数据安全法、个保法、生成式 AI 合规,告警误报率超 95%,人工响应 4 小时,远不及监管 30 分钟。
 
@@ -261,7 +261,7 @@ AegisTeam Adaptive(自适应盾牌防御团队)面向中小单位,核心理念�
 > 设计原则:工程化深度可一眼看见;Mock 优先,真实可插拔;文档、测试、CI/CD 一应俱全。
 
 ```
-AegisTeam-Adaptive/
+AegIsLoop-Adaptive/
 │
 ├── README.md                      # 项目说明 + 快速开始 + 架构图
 ├── LICENSE                        # Apache License 2.0
@@ -306,12 +306,12 @@ AegisTeam-Adaptive/
 │   ├── architecture-diagrams/     # 架构图源文件(PlantUML/Mermaid)
 │   ├── api-reference/             # 自动生成 API 文档
 │   ├── ppt/                       # PPT 源文件 + 18 页大纲
-│   │   ├── AegisTeam-Adaptive-18p.pptx
+│   │   ├── AegIsLoop-Adaptive-18p.pptx
 │   │   └── 18-page-outline.md
 │   └── whitepaper.pdf             # 完整白皮书(导出版)
 │
 ├── src/
-│   ├── aegisteam/                 # 核心框架
+│   ├── aegisloop/                 # 核心框架
 │   │   ├── __init__.py
 │   │   ├── orchestrator.py        # 调度总线(基于 Hiclaw)
 │   │   ├── context_bus.py         # 上下文传递
@@ -434,7 +434,7 @@ AegisTeam-Adaptive/
 
 | 目录 | 数量预期 | 评审维度锚定 |
 |---|---|---|
-| `src/aegisteam/` | 10 文件(含 `human_loop.py`) | 工程落地 20% |
+| `src/aegisloop/` | 10 文件(含 `human_loop.py`) | 工程落地 20% |
 | `src/agents/` | 8 Agent × 3 文件 ≈ 24 | 多 Agent 协同 25% |
 | `src/skills/` | 25+ Skill × 3 文件 ≈ 78 | Skill 工程 25% |
 | `src/teams/` | 4 编排 YAML(流 3 已替换为新法规响应流) | 多 Agent 协同 25% |

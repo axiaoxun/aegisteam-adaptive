@@ -1,16 +1,16 @@
 {
-  "team_name": "aegisteam-adaptive",
-  "team_description": "AegisTeam Adaptive 自适应安全运营团队(8 岗位化 Agent + 1 灵活人机协同层)",
+  "team_name": "aegisloop-adaptive",
+  "team_description": "AegIsLoop Adaptive 自适应安全运营团队(8 岗位化 Agent + 1 灵活人机协同层)",
   "version": "1.0.0",
   "created_by": "manager",
   "team_leader": {
-    "name": "aegisteam-leader",
+    "name": "aegisloop-leader",
     "generation": "by-manager-on-team-create",
     "corresponds_to_agent": "a0_leader",
     "runtime": "qwenpow",
     "role": "TeamLeader",
     "responsibilities": [
-      "事故任务接收(@aegisteam-leader mention)",
+      "事故任务接收(@aegisloop-leader mention)",
       "编排流选择(alert / regulator_notice / new_regulation)",
       "AgentLoop 调度(orchestrator-worker, max_iterations=5, max_parallel=3)",
       "证据链拼接",
@@ -72,7 +72,7 @@
       "runtime": "qwenpow",
       "tools": [],
       "risk_authority": ["L0"],
-      "note": "AegisTeam Adaptive 引擎;缺失则不构成 Adaptive"
+      "note": "AegIsLoop Adaptive 引擎;缺失则不构成 Adaptive"
     },
     {
       "name": "a7-knowledge-weaver",

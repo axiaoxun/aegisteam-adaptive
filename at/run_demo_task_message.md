@@ -1,6 +1,6 @@
-# AegisTeam Adaptive — 事故任务消息模板
+# AegIsLoop Adaptive — 事故任务消息模板
 
-本文件包含 3 条事故任务消息。逐条复制到 Element Web 的 Team 房间,在输入框先 `@aegisteam-leader` 然后发送。**必须逐条发送**,等上一条报告完整输出后再发下一条。
+本文件包含 3 条事故任务消息。逐条复制到 Element Web 的 Team 房间,在输入框先 `@aegisloop-leader` 然后发送。**必须逐条发送**,等上一条报告完整输出后再发下一条。
 
 ---
 
@@ -12,7 +12,7 @@
 **风险分级**:L2(需 H1 + H2 审批)
 
 ```text
-@aegisteam-leader
+@aegisloop-leader
 
 事故描述:web-app-prod-01(47.98.x.x,CentOS 7.9,生产)出现 SSH 暴力破解告警。SIEM 显示 5 个不同外部 IP 在 5 分钟内尝试 217 次 SSH 登录,失败率 100%,其中 1 个 IP 在威胁情报中标记为 Tor 出口节点。
 
@@ -42,7 +42,7 @@
 **风险分级**:L3(需 H1 + H2 + 业务负责人(角色)三审)
 
 ```text
-@aegisteam-leader
+@aegisloop-leader
 
 事故描述:收到浙江省公安厅网络安全保卫总队邮件通报(编号 ZJWA-2026-0816-001,9:30 收到),要求 7 个工作日内(8-25 18:00 前)提交整改报告。
 
@@ -76,7 +76,7 @@
 **风险分级**:L3(需三审 + 调动 7 个 Agent)
 
 ```text
-@aegisteam-leader
+@aegisloop-leader
 
 事故描述:法务部告知《生成式 AI 服务管理暂行办法(2026 修订版)》将于 2026-09-01 实施,要求 3 周内(8-31 18:00 前)完成本公司 3 个生成式 AI 应用的合规对齐。
 

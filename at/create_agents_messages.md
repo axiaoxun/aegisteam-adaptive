@@ -1,6 +1,6 @@
-# AegisTeam Adaptive — AgentTeams Manager 创建消息
+# AegIsLoop Adaptive — AgentTeams Manager 创建消息
 
-AgentTeams 启动后,把下面这一整段消息复制到 `manager` 房间发送一次即可。消息内已经包含 7 个业务 Worker 和 1 个 Team 的完整定义;TeamLeader 由 manager 在创建 Team 时创建为独立 Worker `aegisteam-leader`(对应 a0_leader 角色)。
+AgentTeams 启动后,把下面这一整段消息复制到 `manager` 房间发送一次即可。消息内已经包含 7 个业务 Worker 和 1 个 Team 的完整定义;TeamLeader 由 manager 在创建 Team 时创建为独立 Worker `aegisloop-leader`(对应 a0_leader 角色)。
 
 发送前请先按 [AGENTTEAMS_RUNBOOK.md](AGENTTEAMS_RUNBOOK.md) 确认 Worker 可访问的工具网关地址,然后把所有 `<MOCK_TOOL_BASE_URL>` 替换为该地址,例如:
 
@@ -20,16 +20,16 @@ Content-Type: application/json
 ## 复制到 Manager 的完整创建请求
 
 ```text
-请为 AegisTeam Adaptive Demo 创建 7 个业务 Worker 和 1 个 Team。创建 Team 时,必须由 manager 创建一个独立 Worker 作为 TeamLeader。以下内容是完整创建脚本,请严格按顺序执行,不要并行创建。
+请为 AegIsLoop Adaptive Demo 创建 7 个业务 Worker 和 1 个 Team。创建 Team 时,必须由 manager 创建一个独立 Worker 作为 TeamLeader。以下内容是完整创建脚本,请严格按顺序执行,不要并行创建。
 
 全局创建约束:
 1. 所有 Worker 必须使用 qwenpow(copow;安装器或界面中也可能显示为 QwenPaw)运行时创建,并使用 AgentTeams 当前配置的真实 LLM。
 2. 必须逐个创建 Worker,禁止并行创建多个 Worker。
 3. 业务 Worker 创建顺序必须是:a1-asset-manager -> a2-threat-detector -> a3-vuln-verifier -> a4-compliance-guard -> a5-incident-responder -> a6-quality-steward -> a7-knowledge-weaver。
 4. 每创建完成一个 Worker 后,必须确认该 Worker 创建成功且可以正常运行,再创建下一个 Worker。
-5. 创建 aegisteam-adaptive Team 时,必须创建一个新的独立 Worker 作为 TeamLeader,名称必须是 aegisteam-leader(对应 a0_leader 角色)。
+5. 创建 aegisloop-adaptive Team 时,必须创建一个新的独立 Worker 作为 TeamLeader,名称必须是 aegisloop-leader(对应 a0_leader 角色)。
 6. 禁止把 a1-a7 任何一个直接指定为 leader。
-7. 必须等 7 个业务 Worker 全部创建完成并确认正常运行后,才允许创建 aegisteam-adaptive Team。
+7. 必须等 7 个业务 Worker 全部创建完成并确认正常运行后,才允许创建 aegisloop-adaptive Team。
 8. Worker 初始化可能拉起容器运行时并写入依赖;并行创建会造成高 I/O 消耗,低规格机器可能因此阻塞,所以不要为了提速而并行执行。
 9. 7 个业务 Worker 的 AgentSpec、Skill、工具契约都在本消息中内联,不依赖 Worker 读取宿主机目录中的文件。
 10. 所有工具数据都通过 HTTP mock 工具网关获取,基础地址为 <MOCK_TOOL_BASE_URL>。
@@ -43,7 +43,7 @@ Content-Type: application/json
 Step 1. 创建 Worker: a1-asset-manager
 ============================================================
 
-请创建一个名为 a1-asset-manager 的 Worker,作为 AegisTeam Adaptive 的 AssetManager Agent(资产管理岗)。
+请创建一个名为 a1-asset-manager 的 Worker,作为 AegIsLoop Adaptive 的 AssetManager Agent(资产管理岗)。
 
 创建要求:
 - 运行时必须使用 qwenpow(copow;也可能显示为 QwenPaw)。
@@ -95,7 +95,7 @@ risk_authority: ["L0"]
 Step 2. 创建 Worker: a2-threat-detector
 ============================================================
 
-请创建一个名为 a2-threat-detector 的 Worker,作为 AegisTeam Adaptive 的 ThreatDetector Agent(告警分析师岗)。
+请创建一个名为 a2-threat-detector 的 Worker,作为 AegIsLoop Adaptive 的 ThreatDetector Agent(告警分析师岗)。
 
 创建要求:
 - 运行时必须使用 qwenpow。
@@ -150,7 +150,7 @@ risk_authority: ["L0", "L1"]
 Step 3. 创建 Worker: a3-vuln-verifier
 ============================================================
 
-请创建一个名为 a3-vuln-verifier 的 Worker,作为 AegisTeam Adaptive 的 VulnVerifier Agent(漏洞验证岗)。
+请创建一个名为 a3-vuln-verifier 的 Worker,作为 AegIsLoop Adaptive 的 VulnVerifier Agent(漏洞验证岗)。
 
 创建要求:
 - 运行时必须使用 qwenpow。
@@ -202,7 +202,7 @@ risk_authority: ["L0"]
 Step 4. 创建 Worker: a4-compliance-guard
 ============================================================
 
-请创建一个名为 a4-compliance-guard 的 Worker,作为 AegisTeam Adaptive 的 ComplianceGuard Agent(合规管理岗)。
+请创建一个名为 a4-compliance-guard 的 Worker,作为 AegIsLoop Adaptive 的 ComplianceGuard Agent(合规管理岗)。
 
 创建要求:
 - 运行时必须使用 qwenpow。
@@ -255,7 +255,7 @@ risk_authority: ["L0", "L1"]
 Step 5. 创建 Worker: a5-incident-responder
 ============================================================
 
-请创建一个名为 a5-incident-responder 的 Worker,作为 AegisTeam Adaptive 的 IncidentResponder Agent(应急响应岗)。
+请创建一个名为 a5-incident-responder 的 Worker,作为 AegIsLoop Adaptive 的 IncidentResponder Agent(应急响应岗)。
 
 创建要求:
 - 运行时必须使用 qwenpow。
@@ -308,7 +308,7 @@ risk_authority: ["L0", "L1"]
 Step 6. 创建 Worker: a6-quality-steward
 ============================================================
 
-请创建一个名为 a6-quality-steward 的 Worker,作为 AegisTeam Adaptive 的 QualitySteward Agent(质量治理岗 / Adaptive 引擎)。
+请创建一个名为 a6-quality-steward 的 Worker,作为 AegIsLoop Adaptive 的 QualitySteward Agent(质量治理岗 / Adaptive 引擎)。
 
 创建要求:
 - 运行时必须使用 qwenpow。
@@ -317,7 +317,7 @@ Step 6. 创建 Worker: a6-quality-steward
 - 独立于 A0-A5 业务链路,在每个 Worker 输出后做质量门检查。
 - 维护 7 大职责:输出质量、Skill 偏差、规则漂移、RAG 健康、证据链完整性、自适应反馈、跨 Agent 一致性。
 - 不可执行任何业务动作,只做监督与反馈。
-- 缺失此 Agent 则 AegisTeam 不构成"Adaptive"。
+- 缺失此 Agent 则 AegIsLoop 不构成"Adaptive"。
 
 AgentSpec:
 name: a6-quality-steward
@@ -363,7 +363,7 @@ risk_authority: ["L0"]
 Step 7. 创建 Worker: a7-knowledge-weaver
 ============================================================
 
-请创建一个名为 a7-knowledge-weaver 的 Worker,作为 AegisTeam Adaptive 的 KnowledgeWeaver Agent(复盘知识织造岗)。
+请创建一个名为 a7-knowledge-weaver 的 Worker,作为 AegIsLoop Adaptive 的 KnowledgeWeaver Agent(复盘知识织造岗)。
 
 创建要求:
 - 运行时必须使用 qwenpow。
@@ -410,7 +410,7 @@ risk_authority: ["L0"]
 完成 a7-knowledge-weaver 创建后,请确认 7 个业务 Worker 都创建成功且可正常运行,再继续 Step 8。
 
 ============================================================
-Step 8. 创建 Team: aegisteam-adaptive
+Step 8. 创建 Team: aegisloop-adaptive
 ============================================================
 
 在确认以下 7 个业务 Worker 都创建成功且可正常运行后,再创建 Team:
@@ -422,16 +422,16 @@ Step 8. 创建 Team: aegisteam-adaptive
 6. a6-quality-steward
 7. a7-knowledge-weaver
 
-请创建一个名为 aegisteam-adaptive 的 Team,包含以上 7 个业务 Worker。
+请创建一个名为 aegisloop-adaptive 的 Team,包含以上 7 个业务 Worker。
 
 Team 创建要求:
-- 创建 Team 时,必须创建一个新的独立 Worker 作为 TeamLeader,名称必须是 aegisteam-leader(对应 a0_leader 角色)。
+- 创建 Team 时,必须创建一个新的独立 Worker 作为 TeamLeader,名称必须是 aegisloop-leader(对应 a0_leader 角色)。
 - 禁止把 a1-a7 任何一个直接指定为 leader。
 - 7 个业务 Worker 只作为被 TeamLeader 调度的专业角色参与 Team,不承担 TeamLeader 身份。
 - TeamLeader 使用以下 AgentSpec(由 manager 在创建 Team 时自动使用):
 
 TeamLeader AgentSpec:
-name: aegisteam-leader
+name: aegisloop-leader
 role: TeamLeader
 generation: by-manager-on-team-create
 mission: |
@@ -454,7 +454,7 @@ risk_authority: ["L0", "L1", "L2", "L3"]  # 可派发任何风险级别动作,�
 
 团队运行规则:
 - 使用 AgentTeams 当前配置的真实 LLM 完成推理和协作。
-- manager 只负责创建和管理;事故任务由 aegisteam-adaptive 对应的 Team 房间接收,用户需要在消息开头 @<team_leader_name>,该 mention 应指向 aegisteam-leader。
+- manager 只负责创建和管理;事故任务由 aegisloop-adaptive 对应的 Team 房间接收,用户需要在消息开头 @<team_leader_name>,该 mention 应指向 aegisloop-leader。
 - 7 个业务 Worker 的 AgentSpec、Skill、工具契约都已在本消息中内联,不依赖 Worker 读取宿主机文件。
 - 所有工具数据通过 HTTP mock 工具网关获取,基础地址为 <MOCK_TOOL_BASE_URL>。
 - 收到事故任务后,由 TeamLeader 调度以下业务 Worker 协作(3 条编排流):
@@ -467,10 +467,10 @@ risk_authority: ["L0", "L1", "L2", "L3"]  # 可派发任何风险级别动作,�
 
 全部创建完成后,请输出创建结果摘要,至少包含:
 - 7 个业务 Worker 的创建状态和运行时类型。
-- Team 创建时生成的独立 TeamLeader Worker 名称和运行时类型,必须单独列出 aegisteam-leader。
-- aegisteam-adaptive Team 的创建状态。
-- TeamLeader 指定结果,必须显示 aegisteam-leader 是 TeamLeader。
-- Matrix 会话列表中名称以 Team 开头、对应 aegisteam-adaptive 的 Team 房间名称或入口。
-- 需要在 Team 房间中 @ 的 team_leader_name,并说明它对应 aegisteam-leader。
+- Team 创建时生成的独立 TeamLeader Worker 名称和运行时类型,必须单独列出 aegisloop-leader。
+- aegisloop-adaptive Team 的创建状态。
+- TeamLeader 指定结果,必须显示 aegisloop-leader 是 TeamLeader。
+- Matrix 会话列表中名称以 Team 开头、对应 aegisloop-adaptive 的 Team 房间名称或入口。
+- 需要在 Team 房间中 @ 的 team_leader_name,并说明它对应 aegisloop-leader。
 - 提醒用户后续事故任务必须进入 Team 房间后,通过 @<team_leader_name> 的消息发送,不要发送给 manager。
 ```

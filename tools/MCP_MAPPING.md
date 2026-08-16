@@ -1,6 +1,6 @@
-# AegisTeam MCP 映射说明
+# AegIsLoop MCP 映射说明
 
-AegisTeam Adaptive 的 mock 工具网关覆盖 6 类安全运营 MCP 工具,共 12 个函数。
+AegIsLoop Adaptive 的 mock 工具网关覆盖 6 类安全运营 MCP 工具,共 12 个函数。
 
 ## HTTP 调用协议
 

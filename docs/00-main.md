@@ -1,4 +1,4 @@
-# AegisTeam Adaptive · 自适应盾牌防御团队
+# AegIsLoop Adaptive · AegIsLoop 自适应 AI 安全运营
 
 ## 项目策划书 V1.2
 
@@ -18,7 +18,7 @@
 
 ## 0. 执行摘要(1 段话)
 
-AegisTeam Adaptive 面向 80% 年安全预算 < 50 万、专职安全 < 3 人的中小单位,以 **"8 个岗位化 Agent + 1 个灵活的人机协同层 = 1 支自适应增强的安全运营团队"** 为核心叙事,基于 **AgentTeams (Hiclaw) + Skill + MCP + RAG + 可观测** 五层架构(加 L0.5 人机协同层),沉淀 8 个岗位化 Agent(Leader / 资产 / 告警 / 漏洞 / 合规 / 响应 / **质量治理** / 复盘)+ **26** 个可复用 Skill + **5 套 RAG 知识库**(法规 / 漏洞 / Runbook / 复盘 / **供应链安全**)+ **6 类 MCP 工具**(资产 / SBOM / 告警 / 扫描 / 工单 / **通知通道**);严格按 L0-L3 四级安全分级封装,**A6 QualitySteward 实时质量治理**(输出质量监控 / Skill 偏差检测 / 规则漂移监控 / RAG 健康 / 证据完整性 / 自适应反馈)让系统真正 "Adaptive";人机协同层支持双模式(有 Web 平台的多角色协同,无平台的通过钉钉/企微推送对应角色);初赛 Demo 完全基于 Mock 数据,Apache 2.0 全栈开源。
+AegIsLoop Adaptive 面向 80% 年安全预算 < 50 万、专职安全 < 3 人的中小单位,以 **"8 个岗位化 Agent + 1 个灵活的人机协同层 = 1 支自适应增强的安全运营团队"** 为核心叙事,基于 **AgentTeams (Hiclaw) + Skill + MCP + RAG + 可观测** 五层架构(加 L0.5 人机协同层),沉淀 8 个岗位化 Agent(Leader / 资产 / 告警 / 漏洞 / 合规 / 响应 / **质量治理** / 复盘)+ **26** 个可复用 Skill + **5 套 RAG 知识库**(法规 / 漏洞 / Runbook / 复盘 / **供应链安全**)+ **6 类 MCP 工具**(资产 / SBOM / 告警 / 扫描 / 工单 / **通知通道**);严格按 L0-L3 四级安全分级封装,**A6 QualitySteward 实时质量治理**(输出质量监控 / Skill 偏差检测 / 规则漂移监控 / RAG 健康 / 证据完整性 / 自适应反馈)让系统真正 "Adaptive";人机协同层支持双模式(有 Web 平台的多角色协同,无平台的通过钉钉/企微推送对应角色);初赛 Demo 完全基于 Mock 数据,Apache 2.0 全栈开源。
 
 ---
 
@@ -46,7 +46,7 @@ AegisTeam Adaptive 面向 80% 年安全预算 < 50 万、专职安全 < 3 人的
 |---|---|
 | **Agent 角色** | 团队岗位化 1:1 映射真实 SOC 8 大岗(Team Leader / CMDB 维护员 / Tier1 分析师 / IR / 内审员等) |
 | **Skill 抽象** | 26 个 Skill 严格按附录 B 模板;L0-L3 分级 + 失败处理 + 复用度 |
-| **A6 引擎** | A6 QualitySteward 让系统真正"Adaptive"——**没有 A6,AegisTeam Adaptive 不会 Adaptive** |
+| **A6 引擎** | A6 QualitySteward 让系统真正"Adaptive"——**没有 A6,AegIsLoop Adaptive 不会 Adaptive** |
 | **人机协同层** | 双模式(Web 平台 / IM 通道)+ 角色化路由,不绑定具体人 |
 | **编排流** | 3 类全调动 6-7 个 Agent(流 3 调动 7 个,管理路+技术路双路并发) |
 | **安全边界** | 4 级分级 + H1/H2 审批关口 + "不可自动化清单"(8 条红线) |
@@ -263,7 +263,7 @@ AegisTeam Adaptive 面向 80% 年安全预算 < 50 万、专职安全 < 3 人的
 | **A6 证据固化次数** | **1 次**(09:30) | 体现"证据完整性" |
 | 证据文件数 | 18 个 | 体现"可回放可审计" |
 | Runbook 沉淀 | 1 条 | 体现"持续优化" |
-| **A6 自适应反馈** | **1 次**(11:15→11:25) | **体现 AegisTeam 真正"Adaptive"** |
+| **A6 自适应反馈** | **1 次**(11:15→11:25) | **体现 AegIsLoop 真正"Adaptive"** |
 
 > **完整 Mock 剧本(含 Mock 数据种子、5 个镜头切换建议)见子文档 `02-orchestration.md` §4**
 
@@ -329,7 +329,7 @@ AegisTeam Adaptive 面向 80% 年安全预算 < 50 万、专职安全 < 3 人的
 ### 6.1 开源策略
 
 - **协议**:Apache License 2.0
-- **仓库**:`AegisTeam-Adaptive/AegisTeam-Adaptive`(占位)
+- **仓库**:`AegIsLoop-Adaptive/AegIsLoop-Adaptive`(占位)
 - **立即可获得**:完整代码(200-220 文件)+ 3 套 Mock 剧本(告警/通报/**新法规响应**)+ 11 篇设计文档 + PPT 源文件(18 页)+ 白皮书 PDF
 - **GitHub 仓库结构**:同步反映 8 Agent + 26 Skill + 5 RAG + 6 MCP 新规模;新增 `src/human_loop/` 4 文件(人机协同层 Web 模式/IM 模式/角色路由/审批模板)
 
@@ -385,7 +385,7 @@ AegisTeam Adaptive 面向 80% 年安全预算 < 50 万、专职安全 < 3 人的
 
 > **字数控验**:中文标准计字法(汉字 + 英文单词 + 标点 = 1 字),**实测严格 500 字**。
 
-AegisTeam Adaptive(自适应盾牌防御团队)面向中小单位,核心理念是"8 个岗位化 Agent + 1 个灵活的人机协同层 = 1 支自适应增强的安全运营团队"。
+AegIsLoop Adaptive(AegIsLoop 自适应 AI 安全运营)面向中小单位,核心理念是"8 个岗位化 Agent + 1 个灵活的人机协同层 = 1 支自适应增强的安全运营团队"。
 
 **痛点**:80% 中小单位年安全预算 < 50 万、专职安全 < 3 人,雇不起 50 人 SOC;叠加等保 2.0、数据安全法、个保法、生成式 AI 合规,告警误报率超 95%,人工响应 4 小时,远不及监管 30 分钟。
 
@@ -407,15 +407,15 @@ AegisTeam Adaptive(自适应盾牌防御团队)面向中小单位,核心理念�
 
 | 文档 | 路径 | 角色 |
 |---|---|---|
-| **策划书 V1.2**(本文) | `aegisteam-adaptive/00-aegisteam-adaptive-v1.2.md` | **评审主入口** |
-| Agent Identity + Skill 详细定义(V1.1) | `aegisteam-adaptive/01-agents-and-skills.md` | 技术深度 |
-| 编排流 + Mock 剧本(V1.1) | `aegisteam-adaptive/02-orchestration.md` | 多 Agent 协同深度 |
-| 18 页 PPT + 500 字简介 + GitHub(V1.1) | `aegisteam-adaptive/03-presentation-materials.md` | 对外展示 |
-| RAG + MCP + 可观测设计(V1.1) | `aegisteam-adaptive/04-infrastructure.md` | 工程落地深度 |
+| **策划书 V1.2**(本文) | `aegisloop-adaptive/00-aegisloop-adaptive-v1.2.md` | **评审主入口** |
+| Agent Identity + Skill 详细定义(V1.1) | `aegisloop-adaptive/01-agents-and-skills.md` | 技术深度 |
+| 编排流 + Mock 剧本(V1.1) | `aegisloop-adaptive/02-orchestration.md` | 多 Agent 协同深度 |
+| 18 页 PPT + 500 字简介 + GitHub(V1.1) | `aegisloop-adaptive/03-presentation-materials.md` | 对外展示 |
+| RAG + MCP + 可观测设计(V1.1) | `aegisloop-adaptive/04-infrastructure.md` | 工程落地深度 |
 
 ---
 
 **文档版本**:V1.2 / 2026-08-16
-**作者**:AegisTeam Adaptive 文档组
+**作者**:AegIsLoop Adaptive 文档组
 **License**:Apache 2.0
 **竞赛合规**:本文档与所有子文档均严格遵循 GOAI 比赛手册附录 A(Agent Identity 模板)+ 附录 B(Skill 模板)+ 附录 C(项目 one-pager)的格式要求。

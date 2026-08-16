@@ -1,4 +1,4 @@
-# AegisTeam Adaptive — 18 页 PPT 草稿
+# AegIsLoop Adaptive — 18 页 PPT 草稿
 
 > 基于 `docs/03-presentation-materials.md` 大纲落到 18 页。Markdown 草稿,后续可贴入 Keynote / PPT 排版。
 > 每页右上角标注对应评审维度。
@@ -7,13 +7,13 @@
 
 ## 第 1 页:封面
 
-**标题**:AegisTeam Adaptive — 自适应盾牌防御团队
+**标题**:AegIsLoop Adaptive — AegIsLoop 自适应 AI 安全运营
 
 **副标题**:8 个岗位化 Agent + 1 个灵活的人机协同层 = 1 支自适应增强的安全运营团队
 
 **参赛赛道**:GOAI 2026 赛道一:新智基座 | Agent Infra — Cybersecurity + AI
 
-**团队**:AegisTeam Adaptive(3 人小团队,10 年安全运营 + 2 年大模型经验)
+**团队**:AegIsLoop Adaptive(3 人小团队,10 年安全运营 + 2 年大模型经验)
 
 **日期**:2026-08-16
 
@@ -82,7 +82,7 @@
 ```
 ┌────────────────────────────────────────────┐
 │ L1  Team 编排层(AgentTeams / hiclaw)      │
-│   TeamLeader aegisteam-leader (A0)         │
+│   TeamLeader aegisloop-leader (A0)         │
 └────────────────────┬───────────────────────┘
                      ▼
 ┌────────────────────────────────────────────┐
@@ -116,7 +116,7 @@
 ```
                 ┌──────────────────┐
                 │  A0 Leader       │
-                │  aegisteam-leader│
+                │  aegisloop-leader│
                 │  (TeamLeader)    │
                 └────┬─┬─┬─┬─┬─┬─┬─┘
                      │ │ │ │ │ │ │
@@ -402,7 +402,7 @@ INC-2003 触发                │ 5. 内容审核(aliyun.green) │
 
 **评审维度**:多 Agent 协同(25%)+ 工程落地(20%)
 
-**为什么必须有 A6?** AegisTeam 项目名中"Adaptive"的体现。无 A6,系统只能"自动化"而不能"自适应"。
+**为什么必须有 A6?** AegIsLoop 项目名中"Adaptive"的体现。无 A6,系统只能"自动化"而不能"自适应"。
 
 | # | 职责 | 输出指标 | 自适应反馈 |
 |---|---|---|---|
@@ -501,7 +501,7 @@ INC-2003 触发                │ 5. 内容审核(aliyun.green) │
 | 问题 | 答案要点 |
 |---|---|
 | Q:为什么 A0 叫 Leader 不叫 Scheduler? | AgentTeams 框架规范:Team Leader 角色 |
-| Q:A6 缺失会怎样? | 系统只能"自动化"不能"自适应",不构成 AegisTeam Adaptive |
+| Q:A6 缺失会怎样? | 系统只能"自动化"不能"自适应",不构成 AegIsLoop Adaptive |
 | Q:为什么 8 个 Agent 不是 4 个? | 8 个岗位化映射 SOC 真实协作;4 个粒度太粗 |
 | Q:如何保证 Skill 不会漂移? | A6 S25 drift_detection 持续监控,v1.0 行为基线对比 |
 | Q:监管通报 H1/H2 为什么分开? | 监管要求事实确认(可追溯)+ 执行审批(责任明确)分离 |

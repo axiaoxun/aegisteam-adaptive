@@ -1,6 +1,6 @@
 version: "3.8"
 
-# AegisTeam Adaptive — 一键启动编排
+# AegIsLoop Adaptive — 一键启动编排
 #
 # 启动方式:
 #   docker-compose up -d
@@ -16,8 +16,8 @@ services:
     build:
       context: .
       dockerfile: tools/Dockerfile
-    image: aegisteam/mock-tool-gateway:0.1.0
-    container_name: aegisteam-mock-tool-gateway
+    image: aegisloop/mock-tool-gateway:0.1.0
+    container_name: aegisloop-mock-tool-gateway
     ports:
       - "18090:18090"
     environment:
@@ -33,19 +33,19 @@ services:
       start_period: 5s
     restart: unless-stopped
     networks:
-      - aegisteam-net
+      - aegisloop-net
 
   # ========== Element Web(AgentTeams Matrix 客户端) ==========
   # 注意:实际生产由 hiclaw 安装器自动管理,这里只是样例
   element-web:
     image: vectorim/element-web:latest
-    container_name: aegisteam-element-web
+    container_name: aegisloop-element-web
     ports:
       - "18088:80"
     depends_on:
       - mock-tool-gateway
     networks:
-      - aegisteam-net
+      - aegisloop-net
     profiles:
       - with-element-web  # 默认不启动,需要时加 --profile with-element-web
 
@@ -53,7 +53,7 @@ services:
   # 简化版:用一个 Python 静态文件服务模拟 Nacos Registry API
   nacos-mock:
     image: python:3.11-slim
-    container_name: aegisteam-nacos-mock
+    container_name: aegisloop-nacos-mock
     working_dir: /registry
     volumes:
       - ./at/nacos_registry_mock.json:/registry/registry.json:ro
@@ -61,14 +61,14 @@ services:
     ports:
       - "8848:8848"
     networks:
-      - aegisteam-net
+      - aegisloop-net
     profiles:
       - with-nacos-mock  # 默认不启动,需要时加 --profile with-nacos-mock
 
 networks:
-  aegisteam-net:
+  aegisloop-net:
     driver: bridge
-    name: aegisteam-net
+    name: aegisloop-net
 
 # 复赛全启动(包含 element-web + nacos-mock):
 #   docker-compose --profile with-element-web --profile with-nacos-mock up -d

@@ -1,6 +1,6 @@
-# AegisTeam Adaptive — Web Demo
+# AegIsLoop Adaptive — Web Demo
 
-10 区大屏,展示 8 Agent + 27 Skill + 6 MCP + 5 RAG + 3 编排流 + A6 Adaptive 引擎 + L0.5 人机协同。
+10 区大屏,展示 8 Agent + 32 Skill + 6 MCP + 5 RAG + 3 编排流并行 + A6 自适应引擎 + L0.5 人机协同 + Nacos AI Registry。
 
 ## 运行方式
 
@@ -52,9 +52,9 @@ docker run --rm -p 8080:80 -v "$PWD/web":/usr/share/nginx/html nginx:alpine
 
 打开 `http://localhost:8080/`,应看到:
 - 黑色背景的 10 区作战大屏
-- 顶部:「AegisTeam Adaptive」标题 + A6 自适应 94%
+- 顶部:「AegIsLoop Adaptive」标题 + A6 自适应 94%
 - 中部:8 个 Agent 卡片(A0 紫色,带 ADAPTIVE 徽章)
-- 点 ▶ 播放按钮 → 事件流区域开始滚动
+- 点 ▶ 全部播放 → 3 列事件流同时滚动
 
 ## 技术栈
 

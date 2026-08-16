@@ -1,7 +1,7 @@
 {
-  "_comment": "AegisTeam Adaptive — Nacos AI Registry mock 数据(复赛阶段使用)。初赛阶段 Worker 不读取此文件,所有 Prompt/Skill/AgentSpec 内联在 create_agents_messages.md 中。",
+  "_comment": "AegIsLoop Adaptive — Nacos AI Registry mock 数据(复赛阶段使用)。初赛阶段 Worker 不读取此文件,所有 Prompt/Skill/AgentSpec 内联在 create_agents_messages.md 中。",
   "registry_type": "nacos-ai-registry",
-  "registry_endpoint": "https://nacos.io/ai-registry/aegisteam-adaptive",
+  "registry_endpoint": "https://nacos.io/ai-registry/aegisloop-adaptive",
   "versioning": {
     "strategy": "semver",
     "current_versions": {
@@ -11,7 +11,7 @@
     }
   },
   "skill_registry": {
-    "namespace": "aegisteam-adaptive",
+    "namespace": "aegisloop-adaptive",
     "skills": [
       {
         "name": "s01_incident_routing",
@@ -233,7 +233,7 @@
     ]
   },
   "agent_spec_registry": {
-    "namespace": "aegisteam-adaptive/agents",
+    "namespace": "aegisloop-adaptive/agents",
     "specs": [
       {"name": "a0_leader", "version": "v1.0.0", "tag": "stable", "role": "TeamLeader"},
       {"name": "a1_asset_manager", "version": "v1.3.1", "tag": "stable"},

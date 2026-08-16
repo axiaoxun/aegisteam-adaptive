@@ -3,19 +3,19 @@
 ## 1. 在 GitHub 创建空仓库
 
 1. 打开 https://github.com/new
-2. 仓库名:`aegisteam-adaptive`
+2. 仓库名:`aegisloop-adaptive`
 3. **不要勾选** Add a README file / Add .gitignore / Choose a license(我们已经有了)
 4. 私有/公开二选一(比赛一般选公开)
 5. 点击 Create repository
 
 记下仓库 URL,例如:
-- HTTPS:`https://github.com/<your-username>/aegisteam-adaptive.git`
-- SSH:`git@github.com:<your-username>/aegisteam-adaptive.git`
+- HTTPS:`https://github.com/<your-username>/aegisloop-adaptive.git`
+- SSH:`git@github.com:<your-username>/aegisloop-adaptive.git`
 
 ## 2. 本地首次推送
 
 ```bash
-cd D:\GOAI\infra参赛作品\aegisteam-adaptive
+cd D:\GOAI\infra参赛作品\aegisloop-adaptive
 
 # 初始化 git(如果还没有)
 git init
@@ -25,13 +25,13 @@ git config user.name "Your Name"
 git config user.email "your-email@example.com"
 
 # 添加远程仓库(用上面记下的 URL)
-git remote add origin https://github.com/<your-username>/aegisteam-adaptive.git
+git remote add origin https://github.com/<your-username>/aegisloop-adaptive.git
 
 # 暂存所有文件
 git add .
 
 # 第一次提交
-git commit -m "feat: AegisTeam Adaptive v1.0 initial submission
+git commit -m "feat: AegIsLoop Adaptive v1.0 initial submission
 
 - 8 AgentSpec + 27 SKILL.md
 - HTTP mock tool gateway (6 类 MCP × 12 函数)
@@ -79,7 +79,7 @@ git push -u origin feature/registry-nacos
 
 ## 6. 验证推送成功
 
-访问 `https://github.com/<your-username>/aegisteam-adaptive`,确认:
+访问 `https://github.com/<your-username>/aegisloop-adaptive`,确认:
 - README.md 渲染正常(有徽章和架构图)
 - docs/ 5 份方案文档在
 - at/ 协议文档在

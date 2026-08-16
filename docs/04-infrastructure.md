@@ -1,6 +1,6 @@
-# AegisTeam Adaptive · 基础设施层设计
+# AegIsLoop Adaptive · 基础设施层设计
 
-> 文档版本:V1.1  ·  日期:2026-08-15  ·  适配:AegisTeam Adaptive(人机协同层 + A0 Leader + 8 Agent + 23 Skill)
+> 文档版本:V1.1  ·  日期:2026-08-15  ·  适配:AegIsLoop Adaptive(人机协同层 + A0 Leader + 8 Agent + 23 Skill)
 >
 > 本文是工程化基础设施总图,聚焦 **RAG 知识库 × MCP 工具集成 × 可观测体系** 三件套,补齐评审中"工程落地 20%"的最高落地分。
 >
@@ -17,7 +17,7 @@
 
 ## 一、5 套 RAG 知识库设计
 
-AegisTeam Adaptive 的"自适应"二字落地在知识上。8 个 Agent 之所以能 7×24 接管 SOC 团队,前提是有 5 套持续更新的知识库作为决策证据。所有知识库统一部署在 **PolarDB for PostgreSQL + pgvector** 上(行存 + 向量混合存储),由 Nacos 统一配置索引参数,由 RocketMQ 异步接收增量更新。
+AegIsLoop Adaptive 的"自适应"二字落地在知识上。8 个 Agent 之所以能 7×24 接管 SOC 团队,前提是有 5 套持续更新的知识库作为决策证据。所有知识库统一部署在 **PolarDB for PostgreSQL + pgvector** 上(行存 + 向量混合存储),由 Nacos 统一配置索引参数,由 RocketMQ 异步接收增量更新。
 
 ### 1.1 法规知识库(KB-Compliance)
 

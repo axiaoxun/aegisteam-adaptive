@@ -1,4 +1,4 @@
-# AegisTeam Adaptive · AgentTeams 编排流与 Mock 演示剧本
+# AegIsLoop Adaptive · AgentTeams 编排流与 Mock 演示剧本
 
 > 适用对象:GOAI 赛道一·Agent Infra 评审材料
 > 配套文档:`00-overview.md`(项目叙事)/ `01-agents-and-skills.md`(8 岗位身份 + 23 Skill 详细定义)/ `03-skill-catalog.md`(Skill 索引)
@@ -10,7 +10,7 @@
 ## 一、协同编排总则
 
 ### 1.1 编排框架
-AegisTeam Adaptive 基于 **AgentTeams (Hiclaw, hiclaw.io)** 实现多 Agent 协同。在 AgentTeams 概念中,A0 担任 **Team Leader** 角色,负责把来自四面八方的任务(告警、监管通报、新法规事件、巡检请求、应急工单)分派给合适的 Agent,跟踪执行进度,升级阻塞,日终汇总;其他 7 个 Agent 各司其职,通过共享上下文(SharedContext Store)+ 事件总线(EventBus)通信。所有编排遵循以下原则:
+AegIsLoop Adaptive 基于 **AgentTeams (Hiclaw, hiclaw.io)** 实现多 Agent 协同。在 AgentTeams 概念中,A0 担任 **Team Leader** 角色,负责把来自四面八方的任务(告警、监管通报、新法规事件、巡检请求、应急工单)分派给合适的 Agent,跟踪执行进度,升级阻塞,日终汇总;其他 7 个 Agent 各司其职,通过共享上下文(SharedContext Store)+ 事件总线(EventBus)通信。所有编排遵循以下原则:
 
 - **中心化 Leader + 分布式协作**:**A0 Leader Agent** 负责事件入口、派工、升级、关闭;其他 7 个 Agent 各司其职,通过共享上下文(SharedContext Store)+ 事件总线(EventBus)通信。
 - **A6 实时质量治理**:**A6 QualitySteward** 不再只是"事后留痕",而是以"实时质量治理 Agent + 证据链完整性 Agent + 自适应反馈 Agent"三重身份嵌入每一编排流的关键节点(关键决策前、关键变更前、闭环前),对每一步进行质量门禁检查、证据链预固化、流程偏差检测,发现偏差时触发自适应反馈,推动 A0 Leader 调整 Skill。
@@ -239,7 +239,7 @@ AegisTeam Adaptive 基于 **AgentTeams (Hiclaw, hiclaw.io)** 实现多 Agent 协
 
 ```mermaid
 graph TB
-    subgraph SOC["AegisTeam Adaptive · 1 人 1 队 · Adaptive 自适应"]
+    subgraph SOC["AegIsLoop Adaptive · 1 人 1 队 · Adaptive 自适应"]
         A0["A0 Leader<br/>(Team Leader)<br/>值长 · 中心化调度"]
         A1["A1 资产管理<br/>(SBOM/CMDB/影子IT)"]
         A2["A2 告警归并<br/>(SOC 一线)"]
@@ -497,12 +497,12 @@ graph TB
 | 多 Agent 协同 | 25% | **3 类编排流(22+26+14 步)+ 拓扑图 + 升级路径**直接拿分,体现角色分工、上下文传递、状态跟踪;**7 个 Agent 协同的编排流 3(新法规响应)是亮点**,管理路+技术路双线并发 |
 | Skill 工程 | 25% | 编排流中每步都明确引用 Skill 名,对应 23 Skill(扩展 26 Skill)清单(见 01-agents-and-skills.md);**A6 新增 3 Skill(quality_governance / evidence_chain / adaptive_feedback)是 Adaptive 的差异化亮点** |
 | 工程落地 | 20% | 明确技术栈:AgentTeams / MCP / RAG(5 套含 KB-SupplyChain)/ AgentScope Studio,所有组件均给出 Mock 替身;A6 实时质量治理嵌入每个编排流关键节点 |
-| 开源 | 5% | 编排流可在 GitHub 开源,作为 1 个独立模块 `aegisteam-orchestrator`;A6 三个新 Skill 也单独开源 `aegisteam-quality-steward` |
+| 开源 | 5% | 编排流可在 GitHub 开源,作为 1 个独立模块 `aegisloop-orchestrator`;A6 三个新 Skill 也单独开源 `aegisloop-quality-steward` |
 
 ---
 
 **文档版本**:V1.1 / 2026-08-16  
-**作者**:AegisTeam Adaptive 文档组  
+**作者**:AegIsLoop Adaptive 文档组  
 **配套阅读**:`00-overview.md` / `01-agents-and-skills.md` / `03-skill-catalog.md` / `04-rag-mcp-observability.md`  
 **变更记录**:
 - V1.1(2026-08-16):A0 → A0 Leader(对齐 AgentTeams Team Leader 概念);A6 → A6 QualitySteward(三重身份:实时质量治理 + 证据链完整性 + 自适应反馈);编排流 3 由"周期性合规自评流"完全重写为"新法规响应流 New-Regulation-Response"(7 Agent / 14 步 / 管理路+技术路双线);编排流 1/2 各加 2 步体现 A6 实时质量治理;Mock 剧本去人名化,统一用角色表述

@@ -1,17 +1,17 @@
-# AegisTeam Adaptive — AgentTeam 拓扑
+# AegIsLoop Adaptive — AgentTeam 拓扑
 
-本文件描述 AegisTeam Adaptive 项目的 Team 形态。主运行路径是 **AgentTeams + 真实 LLM Worker + HTTP mock 工具网关**。
+本文件描述 AegIsLoop Adaptive 项目的 Team 形态。主运行路径是 **AgentTeams + 真实 LLM Worker + HTTP mock 工具网关**。
 
 ## AgentTeams 运行时
 
-| AgentTeams 概念 | AegisTeam 设计 |
+| AgentTeams 概念 | AegIsLoop 设计 |
 | --- | --- |
 | Manager 房间 | 接收自包含的 Agent 创建消息(Step 1-7 + Step 8 Team) |
-| Team 房间 | Matrix 会话列表中名称以 `Team` 开头;用户通过 `@aegisteam-leader` 发送事故任务 |
-| TeamLeader Worker | 创建 Team 时由 manager 生成的独立 Worker `aegisteam-leader`(对应 a0_leader 角色) |
+| Team 房间 | Matrix 会话列表中名称以 `Team` 开头;用户通过 `@aegisloop-leader` 发送事故任务 |
+| TeamLeader Worker | 创建 Team 时由 manager 生成的独立 Worker `aegisloop-leader`(对应 a0_leader 角色) |
 | Worker 房间 | 运行 7 个角色明确的业务 LLM Agent(a1-a7) |
 | Worker 运行时 | 统一使用 `qwenpow`(copow / QwenPaw) |
-| 创建策略 | `manager` 串行创建 7 个业务 Worker;创建 Team 时再生成独立 TeamLeader Worker `aegisteam-leader`;禁止把业务 Worker 指定为 leader |
+| 创建策略 | `manager` 串行创建 7 个业务 Worker;创建 Team 时再生成独立 TeamLeader Worker `aegisloop-leader`;禁止把业务 Worker 指定为 leader |
 | AgentSpec | 7 个业务 Worker 的 AgentSpec 内联在 `at/create_agents_messages.md` |
 | 事故输入 | `at/run_demo_task_message.md` 中的 3 条事故任务 |
 | 工具调用 | HTTP mock 工具网关(6 类 MCP mock,12 个函数) |
@@ -30,11 +30,11 @@ AgentTeams 组件通常运行在 Docker 中,因此运行时不依赖宿主机上
                                            │ + 1 Team(自动生成 TeamLeader)
                                            ▼
         ┌──────────────────────────────────────────────────────────────┐
-        │            Team: aegisteam-adaptive                          │
+        │            Team: aegisloop-adaptive                          │
         │            房间名以 "Team" 开头                              │
         │                                                               │
         │   ┌─────────────────────────────────────────────────────┐    │
-        │   │  TeamLeader: aegisteam-leader(由 Manager 创建)      │    │
+        │   │  TeamLeader: aegisloop-leader(由 Manager 创建)      │    │
         │   │  AgentLoop 调度:max_iterations=5, max_parallel=3    │    │
         │   └─────────────────────────────────────────────────────┘    │
         │       │       │       │       │       │       │              │
@@ -74,7 +74,7 @@ AgentTeams 组件通常运行在 Docker 中,因此运行时不依赖宿主机上
 
 ## 工作流(以 Flow 1 告警流为例)
 
-1. TeamLeader `aegisteam-leader` 接收 Team 房间中的事故任务,提取 `incident_id`、`scenario_id` 和用户描述,并调度业务 Worker。
+1. TeamLeader `aegisloop-leader` 接收 Team 房间中的事故任务,提取 `incident_id`、`scenario_id` 和用户描述,并调度业务 Worker。
 2. A1 AssetManager 调用 mock_cmdb / mock_sbom 拉取资产画像和 SBOM。
 3. A2 ThreatDetector 调用 mock_siem / mock_threat_intel 拉取告警、事件、IOC,聚合事故候选。
 4. A3 VulnVerifier 调用 mock_vuln_scanner / mock_sbom 验证漏洞可利用性,给出修复版本。

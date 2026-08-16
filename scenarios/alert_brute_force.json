@@ -92,7 +92,7 @@
         "act": "blocked",
         "outcome": "failure",
         "rt": "Aug 16 2026 09:01:23",
-        "dvchost": "siem-aegisteam",
+        "dvchost": "siem-aegisloop",
         "externalId": "EVT-20260816-0901-001",
         "category": "Authentication",
         "cnt": 47,

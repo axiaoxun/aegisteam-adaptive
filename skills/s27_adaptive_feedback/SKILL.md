@@ -10,7 +10,7 @@ category: quality
 
 ## 作用
 
-触发自适应反馈动作(重跑 / 灰度回滚 / 升级人工专家 / 重设编排流),是 AegisTeam "Adaptive" 的核心机制。
+触发自适应反馈动作(重跑 / 灰度回滚 / 升级人工专家 / 重设编排流),是 AegIsLoop "Adaptive" 的核心机制。
 
 ## 输入
 

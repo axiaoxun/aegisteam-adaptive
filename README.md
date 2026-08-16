@@ -1,4 +1,4 @@
-# AegisTeam Adaptive — 自适应盾牌防御团队
+# AegIsLoop Adaptive — AegIsLoop 自适应 AI 安全运营
 
 > **8 个岗位化 Agent + 1 个灵活的人机协同层 = 1 支自适应增强的安全运营团队**
 >
@@ -13,7 +13,7 @@
 
 ## 🎯 项目定位
 
-AegisTeam Adaptive 是面向**中小单位**(年安全预算 < 50 万、专职安全 < 3 人)的安全运营平台。
+AegIsLoop Adaptive 是面向**中小单位**(年安全预算 < 50 万、专职安全 < 3 人)的安全运营平台。
 
 **痛点**:80% 中小单位雇不起 50 人 SOC;叠加等保 2.0、数据安全法、个保法、生成式 AI 合规,告警误报率超 95%,人工响应 4 小时,远不及监管 30 分钟。
 
@@ -43,11 +43,11 @@ AegisTeam Adaptive 是面向**中小单位**(年安全预算 < 50 万、专职�
 
 ```
 ┌────────────────────────────────────────────────────────────────────┐
-│                  AegisTeam Adaptive 5 层架构                        │
+│                  AegIsLoop Adaptive 5 层架构                        │
 │                                                                    │
 │  ┌──────────────────────────────────────────────────────────┐    │
 │  │ L1  Team 编排层(AgentTeams / hiclaw)                     │    │
-│  │   TeamLeader `aegisteam-leader` (A0)                     │    │
+│  │   TeamLeader `aegisloop-leader` (A0)                     │    │
 │  │   AgentLoop 调度:max_iterations=5, max_parallel=3         │    │
 │  └──────────────────────────────────────────────────────────┘    │
 │                              │                                     │
@@ -135,7 +135,7 @@ bash <(curl -sSL https://higress.ai/hiclaw/install.sh)
 ## 📁 目录结构
 
 ```
-aegisteam-adaptive/
+aegisloop-adaptive/
 ├── README.md                          # 本文件
 ├── LICENSE                            # Apache 2.0
 ├── docker-compose.yml                 # 一键启动(mock 网关 + element-web + nacos mock)
@@ -180,8 +180,8 @@ aegisteam-adaptive/
 ├── web/                               # Web 端 demo 前端(React + Vite)
 │   └── README.md
 ├── ppt/                               # 18 页 PPT
-│   ├── AegisTeam-Adaptive-18pages.md
-│   └── AegisTeam-Adaptive-18pages.pdf
+│   ├── AegIsLoop-Adaptive-18pages.md
+│   └── AegIsLoop-Adaptive-18pages.pdf
 └── scripts/                           # 工具脚本
     └── build_submission.sh            # 压缩包打包脚本
 ```
@@ -201,7 +201,7 @@ aegisteam-adaptive/
 | **A6 QualitySteward** | 质量治理(Adaptive 引擎) | 输出质量、Skill 偏差、规则漂移、RAG 健康、证据链、**自适应反馈**、跨 Agent 一致性 | S24-S27 | L0 |
 | A7 KnowledgeWeaver | 复盘知识织造 | 复盘报告生成、RAG 知识回写、改进项跟踪 | (与 A6 联动) | L0 |
 
-> **注**:A6 是 AegisTeam "Adaptive" 的核心引擎,缺失则不构成 Adaptive。
+> **注**:A6 是 AegIsLoop "Adaptive" 的核心引擎,缺失则不构成 Adaptive。
 
 ---
 
@@ -358,7 +358,7 @@ PPT 第 8-9 页将明确画出此全链路。
 | 创建脚本 | [at/create_agents_messages.md](at/create_agents_messages.md) | 复制到 Manager |
 | 事故任务 | [at/run_demo_task_message.md](at/run_demo_task_message.md) | 3 条事故 |
 | MCP 映射 | [tools/MCP_MAPPING.md](tools/MCP_MAPPING.md) | Mock → 真实 MCP |
-| 18 页 PPT | [ppt/AegisTeam-Adaptive-18pages.md](ppt/AegisTeam-Adaptive-18pages.md) | Markdown 草稿 |
+| 18 页 PPT | [ppt/AegIsLoop-Adaptive-18pages.md](ppt/AegIsLoop-Adaptive-18pages.md) | Markdown 草稿 |
 | Web 端 Demo | [web/](web/) | React + Vite |
 
 ---

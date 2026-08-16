@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# AegisTeam Adaptive — 压缩包打包脚本
+# AegIsLoop Adaptive — 压缩包打包脚本
 # 用法:bash scripts/build_submission.sh
-# 产物:../aegisteam-adaptive-submission.zip(根目录的上一级)
+# 产物:../aegisloop-adaptive-submission.zip(根目录的上一级)
+# 注:本地源码目录名仍是 aegisteam-adaptive(因 Trae IDE 锁住无法重命名)
 # 兼容:Windows Git Bash / Mac / Linux(用 Python zipfile,不依赖 zip 命令)
 
 set -e
@@ -9,12 +10,13 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 PARENT_DIR="$(cd "$ROOT_DIR/.." && pwd)"
-OUTPUT_NAME="aegisteam-adaptive-submission"
+OUTPUT_NAME="aegisloop-adaptive-submission"
 OUTPUT_PATH="$PARENT_DIR/${OUTPUT_NAME}.zip"
-STAGING_DIR="$PARENT_DIR/${OUTPUT_NAME}-staging"
+# staging 目录直接叫 aegisloop-adaptive,这样 zip 内部路径干净
+STAGING_DIR="$PARENT_DIR/aegisloop-adaptive"
 
 echo "=========================================="
-echo "  AegisTeam Adaptive 压缩包打包"
+echo "  AegIsLoop Adaptive 压缩包打包"
 echo "=========================================="
 echo "源码根: $ROOT_DIR"
 echo "输出: $OUTPUT_PATH"
@@ -84,7 +86,7 @@ REQUIRED_FILES=(
   "scenarios/alert_brute_force.json"
   "scenarios/regulator_notice.json"
   "scenarios/new_regulation.json"
-  "ppt/AegisTeam-Adaptive-18pages.md"
+  "ppt/AegIsLoop-Adaptive-18pages.md"
 )
 
 MISSING=0
@@ -154,8 +156,8 @@ else
   exit 1
 fi
 
-# 5. 重命名 staging 目录
-mv "$STAGING_DIR" "$PARENT_DIR/${OUTPUT_NAME}"
+# 5. zip 完成后,清理 staging 目录(避免和源码目录冲突,源码目录可能也叫 aegisloop-adaptive)
+#    注:此处不再 rename staging,因为它已经是干净的 aegisloop-adaptive 名字
 
 # 6. 完成
 echo "[5/6] 完成!"

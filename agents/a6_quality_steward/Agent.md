@@ -1,10 +1,10 @@
-# A6 QualitySteward — 质量治理 Agent(AegisTeam Adaptive 的"自适应"引擎)
+# A6 QualitySteward — 质量治理 Agent(AegIsLoop Adaptive 的"自适应"引擎)
 
 > 角色:质量治理官(角色)/ 系统自适应监督员
 > Worker 名:`a6-quality-steward`
 > 运行时:`qwenpow`(copow/QwenPaw)
 > 创建顺序:Step 6
-> 关键性:**AegisTeam Adaptive 的"Adaptive"由本 Agent 提供能力,缺失则不构成 Adaptive**
+> 关键性:**AegIsLoop Adaptive 的"Adaptive"由本 Agent 提供能力,缺失则不构成 Adaptive**
 
 ---
 
@@ -98,7 +98,7 @@ risk_authority: ["L0"]  # 只做监督,无业务执行权限
 
 ## 为什么必须有 A6?
 
-AegisTeam Adaptive 项目名中"Adaptive"的体现:
+AegIsLoop Adaptive 项目名中"Adaptive"的体现:
 - 7 大核心职责中的"自适应反馈"是 Adaptive 的核心机制
 - 没有 A6,系统只能"自动化"而不能"自适应"
 - 没有 A6,Skill 漂移无人发现,RAG 失效无人知晓,证据链断裂无人修复

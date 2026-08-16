@@ -1,30 +1,33 @@
-// AegisTeam Adaptive — 3 场景预录剧本
+// AegIsLoop Adaptive — 3 编排流预录剧本(并行播放)
 // 22 + 26 + 14 = 62 步事件流
 // 格式:{ step, ts, type, agent, skill, level, message, status }
 
 export const SCENARIOS = [
   {
-    id: 'alert_brute_force',
-    name: 'INC-2001 SSH 暴力破解',
+    id: 'flow_alert',
+    name: 'Flow 1 · 告警流',
+    short: 'INC-2001 SSH 暴力破解',
     desc: '5 个境外 IP + 1 个 Tor 出口对 prod-web-03 暴力破解,使用 OpenSSH 7.4p1',
     severity: 'L2',
-    flowId: 'flow_alert',
+    color: '#f59e0b',
     stepCount: 22,
   },
   {
-    id: 'regulator_notice',
-    name: 'INC-2002 浙江省网安通报',
-    desc: 'ZJWA-2026-0816-001,3 个 PII 数据库涉及 R-001 弱口令/R-002 数据出境/R-003 PIA 缺失',
+    id: 'flow_regulator',
+    name: 'Flow 2 · 监管通报流',
+    short: 'INC-2002 浙江网安通报',
+    desc: 'ZJWA-2026-0816-001,3 个 PII 数据库涉及 R-001/R-002/R-003',
     severity: 'L1',
-    flowId: 'flow_regulator',
+    color: '#ef4444',
     stepCount: 26,
   },
   {
-    id: 'new_regulation',
-    name: 'INC-2003 生成式 AI 办法',
+    id: 'flow_regulation',
+    name: 'Flow 3 · 新法规响应流',
+    short: 'INC-2003 生成式 AI 办法',
     desc: '《生成式 AI 服务管理暂行办法》9-1 实施,3 个 AI 应用需双路径合规改造',
     severity: 'L0',
-    flowId: 'flow_regulation',
+    color: '#10b981',
     stepCount: 14,
   },
 ];
@@ -112,16 +115,19 @@ export const APPROVAL_QUEUE = [
   { id: 'APR-005', scenario: 'INC-2001', level: 'H2', action: '升级 OpenSSH 全集群', requester: 'A5', approver: '运维总监', status: 'approved', waitTime: '1m' },
 ];
 
-// === Nacos AI Registry 状态(初赛内联 / 复赛注册) ===
+// === Nacos AI Registry 状态(简化为:已注册,无阶段区分) ===
+// 注:实际为本地 mock,未对接真实 Nacos 服务;但行为契约与 Nacos 一致
 export const NACOS_REGISTRY = {
-  phase: 'preliminary', // 'preliminary' | 'final'
-  totalSkills: 27,
-  registered: 27,
-  grayReleasing: 0,
-  healthy: 27,
-  degraded: 0,
-  rolledBack: 0,
-  registryUrl: 'inline (初赛) / nacos://aegisteam.ai.registry:8848 (复赛)',
+  registered: 32,        // 已注册 Skill 数
+  total: 32,             // 总数
+  grayReleasing: 0,      // 灰度中
+  healthy: 32,           // 健康
+  degraded: 0,           // 降级
+  rolledBack: 0,         // 回滚
+  registryUrl: 'nacos://aegisloop.ai.registry:8848',
+  namespace: 'aegisloop-adaptive',
+  group: 'AEGISLOOP_SKILLS',
   lastSync: '2026-08-16 09:23:45',
   rollbackRate: 0.000,
+  note: '本地 Mock,与 Nacos 行为契约一致(初赛+复赛统一行为)',
 };

@@ -1,14 +1,14 @@
-# 使用 AgentTeams 运行 AegisTeam Adaptive Demo
+# 使用 AgentTeams 运行 AegIsLoop Adaptive Demo
 
 本手册面向第一次试运行 demo 的参赛者。运行机器可以是本地 Mac、Linux 服务器或云主机;mock 工具网关和 AgentTeams 都部署在同一台机器上。
 
 核心流程:
 
-1. 启动 HTTP mock 工具网关(AegisTeam 6 类 MCP 工具,端口 18090)。
+1. 启动 HTTP mock 工具网关(AegIsLoop 6 类 MCP 工具,端口 18090)。
 2. 安装 AgentTeams,并按安装器引导完成 LLM 配置。
 3. 找到 Docker Worker 可访问的工具网关地址。
 4. 在 `manager` 房间串行创建 7 个业务 Worker,并在创建 Team 时生成独立 TeamLeader Worker。
-5. 在 Matrix 会话列表中进入名称以 `Team` 开头的 Team 房间,通过 `@aegisteam-leader` 分别发送 3 条事故任务。
+5. 在 Matrix 会话列表中进入名称以 `Team` 开头的 Team 房间,通过 `@aegisloop-leader` 分别发送 3 条事故任务。
 6. 验收(参考 §7 的期望信号)。
 
 ## 1. 准备运行机器
@@ -48,7 +48,7 @@ curl -X POST http://127.0.0.1:18090/tools/alert_brute_force/mock_siem.get_alert 
 期望输出分别包含:
 
 ```json
-{"ok": true, "service": "aegisteam-mock-tool-gateway", "version": "0.1.0", "tools_count": 12}
+{"ok": true, "service": "aegisloop-mock-tool-gateway", "version": "0.1.0", "tools_count": 12}
 {"ok": true, "result": ["alert_brute_force", "new_regulation", "regulator_notice"]}
 {"ok": true, "result": {"id": "ALERT-2001", "severity": "CRITICAL", "score": 92.5}}
 ```
@@ -146,16 +146,16 @@ http://172.18.0.1:18090
 2. `manager` 必须逐个创建 Worker,不能并行创建。
 3. 业务 Worker 创建顺序必须是:`a1-asset-manager` → `a2-threat-detector` → `a3-vuln-verifier` → `a4-compliance-guard` → `a5-incident-responder` → `a6-quality-steward` → `a7-knowledge-weaver`。
 4. 每创建完成一个 Worker 后,必须确认该 Worker 创建成功且可以正常运行,再创建下一个 Worker。
-5. 创建 `aegisteam-adaptive` Team 时,必须创建一个新的独立 Worker 作为 TeamLeader,名称必须是 `aegisteam-leader`(对应 a0_leader 角色)。
+5. 创建 `aegisloop-adaptive` Team 时,必须创建一个新的独立 Worker 作为 TeamLeader,名称必须是 `aegisloop-leader`(对应 a0_leader 角色)。
 6. 禁止把 a1-a7 中任何一个直接指定为 leader。
-7. 必须等 7 个业务 Worker 全部创建完成并确认正常运行后,才允许创建 `aegisteam-adaptive` Team。
+7. 必须等 7 个业务 Worker 全部创建完成并确认正常运行后,才允许创建 `aegisloop-adaptive` Team。
 
 Worker 初始化会拉起运行时并写入依赖,低规格机器上并发创建可能造成高 I/O 消耗甚至阻塞。因此不要手动把 Worker 创建任务拆开并并行发送。
 
 注意:
 
 - `manager` 只负责创建和管理。
-- 事故任务后续发给 Matrix 会话列表中名称以 `Team` 开头的 Team 房间,并在消息里 `@aegisteam-leader`,不发给 `manager`。
+- 事故任务后续发给 Matrix 会话列表中名称以 `Team` 开头的 Team 房间,并在消息里 `@aegisloop-leader`,不发给 `manager`。
 - 7 个业务 Worker 的 AgentSpec、Skill 和工具契约已经内联在创建消息中。
 - Worker 不需要读取宿主机上的 `agents/...` 或 `skills/*/SKILL.md` 文件。
 - `skills/*/SKILL.md` 主要用于评审、PPT / 文档追溯和后续 Registry 替换。
@@ -164,20 +164,20 @@ Worker 初始化会拉起运行时并写入依赖,低规格机器上并发创建
 
 打开 [run_demo_task_message.md](run_demo_task_message.md)。
 
-在 Element Web / Matrix 会话列表中找到名称以 `Team` 开头、对应 `aegisteam-adaptive` 的 Team 房间。通常 `manager` 在创建完成摘要里会告诉你 Team 房间名称和 `team_leader_name`。
+在 Element Web / Matrix 会话列表中找到名称以 `Team` 开头、对应 `aegisloop-adaptive` 的 Team 房间。通常 `manager` 在创建完成摘要里会告诉你 Team 房间名称和 `team_leader_name`。
 
 进入 Team 房间后,在输入框先输入并选中 leader mention:
 
 ```text
-@aegisteam-leader
+@aegisloop-leader
 ```
 
-然后把第一条事故任务(`alert_brute_force`)复制到这条 @ 消息里发送。**必须逐个任务发送**:等 `INC-2001` 报告完整输出后,再用同样方式 `@aegisteam-leader` 并发送第二条事故消息(`regulator_notice`)。等 `INC-2002` 报告输出后,再发送第三条(`new_regulation`)。**不要同时发送多起事故**,避免 Team 并发调度时上下文和工具状态互相干扰。
+然后把第一条事故任务(`alert_brute_force`)复制到这条 @ 消息里发送。**必须逐个任务发送**:等 `INC-2001` 报告完整输出后,再用同样方式 `@aegisloop-leader` 并发送第二条事故消息(`regulator_notice`)。等 `INC-2002` 报告输出后,再发送第三条(`new_regulation`)。**不要同时发送多起事故**,避免 Team 并发调度时上下文和工具状态互相干扰。
 
 如果你只看到 `manager` 房间,可以先问:
 
 ```text
-aegisteam-adaptive 对应的 Team 房间在哪里?请告诉我 Matrix 会话列表中名称以 Team 开头的房间名称,以及需要 @ 的 team_leader_name。
+aegisloop-adaptive 对应的 Team 房间在哪里?请告诉我 Matrix 会话列表中名称以 Team 开头的房间名称,以及需要 @ 的 team_leader_name。
 ```
 
 任务消息只包含故障现象和少量初始告警。日志、Trace、配置变更、漏洞、IOC 和通知应由 Agent 通过 HTTP 工具网关主动查询。

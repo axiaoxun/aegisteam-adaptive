@@ -1,4 +1,4 @@
-# AegisTeam Adaptive — 最终提交 Checklist
+# AegIsLoop Adaptive — 最终提交 Checklist
 
 > 提交前逐项打勾。所有项 ✅ 后才能提交。
 
@@ -20,7 +20,7 @@
 
 | # | 检查项 | 状态 |
 |---|---|---|
-| 2.1 | Markdown 草稿 | `ppt/AegisTeam-Adaptive-18pages.md` ✅ |
+| 2.1 | Markdown 草稿 | `ppt/AegIsLoop-Adaptive-18pages.md` ✅ |
 | 2.2 | 渲染为 PDF/PPTX(用户自行操作) | ⏳ 需用 Keynote / PPT 排版后导出 |
 | 2.3 | 含 Nacos 全链路(2 页) | ✅ 第 8-9 页 |
 | 2.4 | 含 5 评审维度自检 | ✅ 第 4 页 |
@@ -34,31 +34,34 @@
 
 | # | 检查项 | 状态 |
 |---|---|---|
-| 3.1 | 压缩包已生成 | `../aegisteam-adaptive-submission.zip` ✅ |
-| 3.2 | 大小 < 50MB | 196KB ✅(无 node_modules) |
+| 3.1 | 压缩包已生成 | `../aegisloop-adaptive-submission.zip` ✅ |
+| 3.2 | 大小 < 50MB | 209KB ✅(无 node_modules) |
 | 3.3 | 含 8 AgentSpec | ✅ |
 | 3.4 | 含 27 SKILL.md | ✅ |
 | 3.5 | 含 3 场景 JSON | ✅ |
 | 3.6 | 含 6 类 MCP mock 代码 | ✅ |
 | 3.7 | 含 5 份方案文档 | ✅ |
-| 3.8 | 含 18 页 PPT Markdown | ✅ |
+| 3.8 | 含 18 页 PPT Markdown(`AegIsLoop-Adaptive-18pages.md`) | ✅ |
 | 3.9 | 含 Apache 2.0 LICENSE | ✅ |
-| 3.10 | 解压即跑(标准目录结构) | ✅ |
+| 3.10 | 解压即跑(标准目录结构,内部路径 `aegisloop-adaptive/`) | ✅ |
 
 **重新生成压缩包**:
 
 ```bash
+# 源码目录名遗留为 aegisteam-adaptive(Trae IDE 占用无法重命名)
 cd D:\GOAI\infra参赛作品\aegisteam-adaptive
 bash scripts/build_submission.sh
+# 如果 build_submission.sh 内部 Python stub 失败,手动用 PowerShell 打包:
+#   powershell -Compress-Archive aegisloop-adaptive aegisloop-adaptive-submission.zip
 ```
 
 **验证压缩包**:
 
 ```bash
 # Windows
-Expand-Archive -Path aegisteam-adaptive-submission.zip -DestinationPath test-extract
+Expand-Archive -Path aegisloop-adaptive-submission.zip -DestinationPath test-extract
 # 或
-unzip -l aegisteam-adaptive-submission.zip
+unzip -l aegisloop-adaptive-submission.zip
 ```
 
 ---
@@ -67,16 +70,20 @@ unzip -l aegisteam-adaptive-submission.zip
 
 | # | 检查项 | 状态 |
 |---|---|---|
-| 4.1 | 在 GitHub 创建空仓库 `aegisteam-adaptive` | ⏳ 用户手动创建 |
-| 4.2 | 本地 `git init` | ⏳ 推送前执行 |
-| 4.3 | `git add . && git commit` | ⏳ 见 PUSH.md |
-| 4.4 | `git push -u origin main` | ⏳ 见 PUSH.md |
-| 4.5 | 验证 README 渲染正常 | ⏳ |
-| 4.6 | 验证 docs/ 5 份方案可见 | ⏳ |
-| 4.7 | 验证 8 AgentSpec + 27 SKILL.md 可见 | ⏳ |
-| 4.8 | 复制仓库 URL 到报名表 | ⏳ |
+| 4.1 | 本地 git 仓库 | ✅ `aegisteam-adaptive/`(注:Trae IDE 占用无法重命名为 `aegisloop-adaptive`,品牌已通过内容体现) |
+| 4.2 | 本地 commit | ✅ 337e996 + e86ec66 + 改名 commit |
+| 4.3 | `git push -u origin main` | ⏳ 见 PUSH.md |
+| 4.4 | 验证 README 渲染正常 | ⏳ |
+| 4.5 | 验证 docs/ 5 份方案可见 | ⏳ |
+| 4.6 | 验证 8 AgentSpec + 27 SKILL.md 可见 | ⏳ |
+| 4.7 | 复制仓库 URL 到报名表 | ⏳ |
 
-**详细步骤**:`PUSH.md`
+**注**:当前 GitHub 仓库地址是 `https://github.com/axiaoxun/aegisteam-adaptive.git`(用户在 push 时给定)。如需在 GitHub 端重命名为 `aegisloop-adaptive`,请在 GitHub Web UI → Settings → General → Repository name 修改,然后:
+```bash
+git remote set-url origin https://github.com/axiaoxun/aegisloop-adaptive.git
+git push -u origin main
+```
+原 URL 会自动 301 重定向到新 URL,无需迁移。
 
 ---
 
@@ -101,15 +108,15 @@ unzip -l aegisteam-adaptive-submission.zip
 
 | # | 字段 | 内容 |
 |---|---|---|
-| 6.1 | 项目名 | AegisTeam Adaptive(自适应盾牌防御团队) |
+| 6.1 | 项目名 | AegIsLoop Adaptive(AegIsLoop 自适应 AI 安全运营) |
 | 6.2 | 赛道 | 赛道一:新智基座 | Agent Infra |
 | 6.3 | 场景 | Cybersecurity + AI |
-| 6.4 | 团队名 | AegisTeam Adaptive |
+| 6.4 | 团队名 | AegIsLoop Adaptive |
 | 6.5 | 团队成员(3 人) | (待填写) |
 | 6.6 | 联系方式 | (待填写) |
-| 6.7 | GitHub 仓库 | (推送后填写) |
+| 6.7 | GitHub 仓库 | https://github.com/axiaoxun/aegisteam-adaptive(可改名 aegisloop-adaptive) |
 | 6.8 | Demo 链接 | (录屏上传后填写) |
-| 6.9 | 压缩包路径 | `aegisteam-adaptive-submission.zip` |
+| 6.9 | 压缩包路径 | `aegisloop-adaptive-submission.zip` |
 | 6.10 | 方案简介(500 字) | `docs/00-main.md` Appendix B |
 
 ---
@@ -118,7 +125,7 @@ unzip -l aegisteam-adaptive-submission.zip
 
 | # | 准备项 | 状态 |
 |---|---|---|
-| 7.1 | 15-20 分钟演讲稿 | ✅ 见 `ppt/AegisTeam-Adaptive-18pages.md` 演讲节奏 |
+| 7.1 | 15-20 分钟演讲稿 | ✅ 见 `ppt/AegIsLoop-Adaptive-18pages.md` 演讲节奏 |
 | 7.2 | Q&A 高频问题准备 | ✅ 见 PPT 末尾 8 个 Q&A |
 | 7.3 | 演示 Demo 备用方案 | ⏳ curl + Element Web 截图 |
 | 7.4 | 团队成员分工(谁讲哪几页) | ⏳ |

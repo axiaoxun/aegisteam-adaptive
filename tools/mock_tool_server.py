@@ -57,7 +57,7 @@ def call_tool(tools, name: str, payload: Dict[str, Any]) -> Any:
 
 
 class AegisMockToolHandler(BaseHTTPRequestHandler):
-    server_version = "AegisTeamMockToolGateway/0.1"
+    server_version = "AegIsLoopMockToolGateway/0.1"
 
     def _send(self, status: HTTPStatus, payload: Dict[str, Any]) -> None:
         body = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
@@ -91,7 +91,7 @@ class AegisMockToolHandler(BaseHTTPRequestHandler):
             if parts == ["health"]:
                 self._send(HTTPStatus.OK, {
                     "ok": True,
-                    "service": "aegisteam-mock-tool-gateway",
+                    "service": "aegisloop-mock-tool-gateway",
                     "version": "0.1.0",
                     "tools_count": 12,
                 })
@@ -154,14 +154,14 @@ def time_str() -> str:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Run AegisTeam Adaptive HTTP mock tool gateway.")
+    parser = argparse.ArgumentParser(description="Run AegIsLoop Adaptive HTTP mock tool gateway.")
     parser.add_argument("--host", default="0.0.0.0")
     parser.add_argument("--port", default=18090, type=int, help="default 18090 (baseline uses 18089)")
     args = parser.parse_args()
 
     server = ThreadingHTTPServer((args.host, args.port), AegisMockToolHandler)
     print(f"===============================================")
-    print(f"  AegisTeam Adaptive Mock Tool Gateway")
+    print(f"  AegIsLoop Adaptive Mock Tool Gateway")
     print(f"  Listening on http://{args.host}:{args.port}")
     print(f"===============================================")
     print(f"Health:        GET  /health")
