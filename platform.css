@@ -1,0 +1,49 @@
+/* AegIsLoop · 自适应安全运营平台 — 人机协同控制台(浅色专业风) */
+
+body {
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  background: #f8fafc;
+}
+
+.mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+.card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.card-hover { transition: all .18s ease; }
+.card-hover:hover {
+  border-color: #c7d2fe;
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.09);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.fade-up { animation: fadeUp .35s ease; }
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .35; }
+}
+.dot-pulse { animation: pulseSoft 1.6s ease-in-out infinite; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: none; }
+}
+.toast { animation: slideIn .25s ease; }
+
+/* 流程步骤连线 */
+.flow-step-line { width: 20px; height: 2px; background: #e2e8f0; flex: none; }
+.flow-step-line.done { background: #6366f1; }

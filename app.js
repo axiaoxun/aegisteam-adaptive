@@ -34,6 +34,10 @@ function Header({ adaptiveHealth, l0_5Status, globalStats }) {
         <div className="text-xs text-gray-400 font-mono">
           ${new Date().toLocaleTimeString('zh-CN')} · v${BRAND.version}
         </div>
+        <a href="./platform.html"
+          className="text-xs px-2.5 py-1 rounded border border-aegis-border text-gray-300 hover:text-white hover:border-aegis-accent transition">
+          用户侧平台 →
+        </a>
       </div>
 
       <div className="flex items-center gap-6">
