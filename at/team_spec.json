@@ -1,0 +1,139 @@
+{
+  "team_name": "aegisteam-adaptive",
+  "team_description": "AegisTeam Adaptive 自适应安全运营团队(8 岗位化 Agent + 1 灵活人机协同层)",
+  "version": "1.0.0",
+  "created_by": "manager",
+  "team_leader": {
+    "name": "aegisteam-leader",
+    "generation": "by-manager-on-team-create",
+    "corresponds_to_agent": "a0_leader",
+    "runtime": "qwenpow",
+    "role": "TeamLeader",
+    "responsibilities": [
+      "事故任务接收(@aegisteam-leader mention)",
+      "编排流选择(alert / regulator_notice / new_regulation)",
+      "AgentLoop 调度(orchestrator-worker, max_iterations=5, max_parallel=3)",
+      "证据链拼接",
+      "审批门控路由(H1/H2/L3)",
+      "事故报告汇总"
+    ]
+  },
+  "business_workers": [
+    {
+      "name": "a1-asset-manager",
+      "agent": "a1_asset_manager",
+      "role": "asset_manager",
+      "step": 1,
+      "runtime": "qwenpow",
+      "tools": ["mock_cmdb", "mock_sbom"],
+      "risk_authority": ["L0"]
+    },
+    {
+      "name": "a2-threat-detector",
+      "agent": "a2_threat_detector",
+      "role": "threat_detector",
+      "step": 2,
+      "runtime": "qwenpow",
+      "tools": ["mock_siem", "mock_threat_intel"],
+      "risk_authority": ["L0", "L1"]
+    },
+    {
+      "name": "a3-vuln-verifier",
+      "agent": "a3_vuln_verifier",
+      "role": "vuln_verifier",
+      "step": 3,
+      "runtime": "qwenpow",
+      "tools": ["mock_vuln_scanner", "mock_sbom"],
+      "risk_authority": ["L0"]
+    },
+    {
+      "name": "a4-compliance-guard",
+      "agent": "a4_compliance_guard",
+      "role": "compliance_guard",
+      "step": 4,
+      "runtime": "qwenpow",
+      "tools": ["mock_cmdb", "mock_sbom", "mock_notify"],
+      "risk_authority": ["L0", "L1"]
+    },
+    {
+      "name": "a5-incident-responder",
+      "agent": "a5_incident_responder",
+      "role": "incident_responder",
+      "step": 5,
+      "runtime": "qwenpow",
+      "tools": ["mock_notify", "mock_siem"],
+      "risk_authority": ["L0", "L1"]
+    },
+    {
+      "name": "a6-quality-steward",
+      "agent": "a6_quality_steward",
+      "role": "quality_steward",
+      "step": 6,
+      "runtime": "qwenpow",
+      "tools": [],
+      "risk_authority": ["L0"],
+      "note": "AegisTeam Adaptive 引擎;缺失则不构成 Adaptive"
+    },
+    {
+      "name": "a7-knowledge-weaver",
+      "agent": "a7_knowledge_weaver",
+      "role": "knowledge_weaver",
+      "step": 7,
+      "runtime": "qwenpow",
+      "tools": [],
+      "risk_authority": ["L0"]
+    }
+  ],
+  "creation_strategy": {
+    "mode": "serial",
+    "order": [
+      "a1-asset-manager",
+      "a2-threat-detector",
+      "a3-vuln-verifier",
+      "a4-compliance-guard",
+      "a5-incident-responder",
+      "a6-quality-steward",
+      "a7-knowledge-weaver"
+    ],
+    "parallelism_allowed": false,
+    "leader_promotion_allowed": false,
+    "leader_generation": "manager creates independent Worker on Team creation"
+  },
+  "scenarios": ["alert_brute_force", "regulator_notice", "new_regulation"],
+  "orchestration_flows": [
+    {
+      "name": "alert_flow",
+      "trigger_scenario": "alert_brute_force",
+      "agents": ["a0-leader", "a1", "a2", "a3", "a5", "a6"],
+      "step_count": 22
+    },
+    {
+      "name": "regulator_notice_flow",
+      "trigger_scenario": "regulator_notice",
+      "agents": ["a0-leader", "a1", "a3", "a4", "a5", "a6"],
+      "step_count": 26
+    },
+    {
+      "name": "new_regulation_flow",
+      "trigger_scenario": "new_regulation",
+      "agents": ["a0-leader", "a1", "a3", "a4", "a5", "a6", "a7"],
+      "step_count": 14,
+      "dual_path": ["management", "technical"]
+    }
+  ],
+  "human_machine_layer": {
+    "version": "0.5",
+    "dual_mode": {
+      "web_platform": {
+        "name": "AegisConsole",
+        "purpose": "角色化协同(合规官/资产管理员/DBA/业务负责人/安全工程师/值班 SRE)",
+        "stack_hint": "React + Vite + TailwindCSS"
+      },
+      "im_channel": {
+        "name": "Multi-Channel Notify",
+        "channels": ["dingtalk", "wecom", "feishu", "smtp"],
+        "purpose": "无平台时通过 IM 推送反馈,角色化路由"
+      }
+    }
+  }
+}

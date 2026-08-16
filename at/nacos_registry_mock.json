@@ -1,0 +1,265 @@
+{
+  "_comment": "AegisTeam Adaptive — Nacos AI Registry mock 数据(复赛阶段使用)。初赛阶段 Worker 不读取此文件,所有 Prompt/Skill/AgentSpec 内联在 create_agents_messages.md 中。",
+  "registry_type": "nacos-ai-registry",
+  "registry_endpoint": "https://nacos.io/ai-registry/aegisteam-adaptive",
+  "versioning": {
+    "strategy": "semver",
+    "current_versions": {
+      "skills": "v1.3.1",
+      "agent_specs": "v1.3.0",
+      "team_spec": "v1.0.0"
+    }
+  },
+  "skill_registry": {
+    "namespace": "aegisteam-adaptive",
+    "skills": [
+      {
+        "name": "s01_incident_routing",
+        "version": "v1.1.0",
+        "owner_agent": "a0_leader",
+        "tag": "stable",
+        "description": "识别事故类型,选择编排流(告警/通报/新法规响应)"
+      },
+      {
+        "name": "s02_worker_dispatch",
+        "version": "v1.2.0",
+        "owner_agent": "a0_leader",
+        "tag": "stable",
+        "description": "按编排流顺序调度业务 Worker,维护依赖图"
+      },
+      {
+        "name": "s03_evidence_chain",
+        "version": "v1.1.0",
+        "owner_agent": "a0_leader",
+        "tag": "stable",
+        "description": "跨 Worker 拼接证据,生成可追溯证据链"
+      },
+      {
+        "name": "s04_approval_gate",
+        "version": "v1.0.0",
+        "owner_agent": "a0_leader",
+        "tag": "stable",
+        "description": "H1 事实确认 + H2 执行审批,根据风险分级路由到人机协同层"
+      },
+      {
+        "name": "s05_remediation_plan",
+        "version": "v1.3.0",
+        "owner_agent": "a5_incident_responder",
+        "tag": "stable",
+        "description": "生成修复步骤、验证步骤和回滚步骤"
+      },
+      {
+        "name": "s06_risk_guard",
+        "version": "v1.2.0",
+        "owner_agent": "a5_incident_responder",
+        "tag": "stable",
+        "description": "按风险等级判断是否允许自动执行"
+      },
+      {
+        "name": "s07_asset_query",
+        "version": "v1.2.0",
+        "owner_agent": "a1_asset_manager",
+        "tag": "stable",
+        "description": "按多条件查询资产"
+      },
+      {
+        "name": "s08_sbom_query",
+        "version": "v1.1.0",
+        "owner_agent": "a1_asset_manager",
+        "tag": "stable",
+        "description": "拉取 SBOM 组件列表"
+      },
+      {
+        "name": "s09_vuln_to_asset",
+        "version": "v1.3.0",
+        "owner_agent": "a1_asset_manager",
+        "tag": "stable",
+        "description": "关联组件漏洞到具体资产"
+      },
+      {
+        "name": "s10_asset_criticality",
+        "version": "v1.0.0",
+        "owner_agent": "a1_asset_manager",
+        "tag": "stable",
+        "description": "评估资产关键度"
+      },
+      {
+        "name": "s11_alert_fusion",
+        "version": "v1.2.0",
+        "owner_agent": "a2_threat_detector",
+        "tag": "stable",
+        "description": "按服务/时间窗口/症状聚合告警"
+      },
+      {
+        "name": "s12_impact_mapping",
+        "version": "v1.1.0",
+        "owner_agent": "a2_threat_detector",
+        "tag": "stable",
+        "description": "推断影响服务、接口、用户动作、业务影响"
+      },
+      {
+        "name": "s13_ioc_enrichment",
+        "version": "v1.2.0",
+        "owner_agent": "a2_threat_detector",
+        "tag": "stable",
+        "description": "威胁情报富化"
+      },
+      {
+        "name": "s14_attack_pattern",
+        "version": "v1.3.0",
+        "owner_agent": "a2_threat_detector",
+        "tag": "stable",
+        "description": "识别 8 类攻击模式"
+      },
+      {
+        "name": "s15_l1_block_action",
+        "version": "v1.1.0",
+        "owner_agent": "a2_threat_detector",
+        "tag": "stable",
+        "description": "L1 阻断动作(需 A0 串行确认)"
+      },
+      {
+        "name": "s16_vuln_scan",
+        "version": "v1.1.0",
+        "owner_agent": "a3_vuln_verifier",
+        "tag": "stable",
+        "description": "调用漏洞扫描器"
+      },
+      {
+        "name": "s17_cve_lookup",
+        "version": "v1.2.0",
+        "owner_agent": "a3_vuln_verifier",
+        "tag": "stable",
+        "description": "查询 CVE 详情"
+      },
+      {
+        "name": "s18_evidence_integrity",
+        "version": "v1.0.0",
+        "owner_agent": "a3_vuln_verifier",
+        "tag": "stable",
+        "description": "证据链完整性校验"
+      },
+      {
+        "name": "s19_fix_advisor",
+        "version": "v1.0.0",
+        "owner_agent": "a3_vuln_verifier",
+        "tag": "stable",
+        "description": "推荐修复版本、补丁、回滚方案"
+      },
+      {
+        "name": "s20_compliance_lookup",
+        "version": "v1.2.0",
+        "owner_agent": "a4_compliance_guard",
+        "tag": "stable",
+        "description": "检索法规库"
+      },
+      {
+        "name": "s21_regulation_diff",
+        "version": "v1.1.0",
+        "owner_agent": "a4_compliance_guard",
+        "tag": "stable",
+        "description": "解析新法规要求"
+      },
+      {
+        "name": "s22_pia_assessment",
+        "version": "v1.0.0",
+        "owner_agent": "a4_compliance_guard",
+        "tag": "stable",
+        "description": "PIA 模板生成"
+      },
+      {
+        "name": "s23_approval_routing",
+        "version": "v1.0.0",
+        "owner_agent": "a4_compliance_guard",
+        "tag": "stable",
+        "description": "决定审批路由"
+      },
+      {
+        "name": "s24_output_quality",
+        "version": "v1.1.0",
+        "owner_agent": "a6_quality_steward",
+        "tag": "stable",
+        "description": "评估 Worker 输出质量(0-100 分)"
+      },
+      {
+        "name": "s25_drift_detection",
+        "version": "v1.1.0",
+        "owner_agent": "a6_quality_steward",
+        "tag": "stable",
+        "description": "识别 Skill 偏差与规则漂移"
+      },
+      {
+        "name": "s26_rag_health",
+        "version": "v1.0.0",
+        "owner_agent": "a6_quality_steward",
+        "tag": "stable",
+        "description": "监控 RAG 知识库健康"
+      },
+      {
+        "name": "s27_adaptive_feedback",
+        "version": "v1.2.0",
+        "owner_agent": "a6_quality_steward",
+        "tag": "stable",
+        "description": "触发自适应反馈(重跑/回滚/升级/重设)"
+      },
+      {
+        "name": "s28_postmortem_gen",
+        "version": "v1.0.0",
+        "owner_agent": "a7_knowledge_weaver",
+        "tag": "stable",
+        "description": "生成复盘报告"
+      },
+      {
+        "name": "s29_rag_rewind",
+        "version": "v1.0.0",
+        "owner_agent": "a7_knowledge_weaver",
+        "tag": "stable",
+        "description": "将复盘条目回写到 KB-Postmortem / KB-Runbook"
+      },
+      {
+        "name": "s30_lesson_extraction",
+        "version": "v1.0.0",
+        "owner_agent": "a7_knowledge_weaver",
+        "tag": "stable",
+        "description": "从事故中提取教训"
+      },
+      {
+        "name": "s31_improvement_tracking",
+        "version": "v1.0.0",
+        "owner_agent": "a7_knowledge_weaver",
+        "tag": "stable",
+        "description": "跟踪改进项,与 A6 自适应反馈联动"
+      }
+    ]
+  },
+  "agent_spec_registry": {
+    "namespace": "aegisteam-adaptive/agents",
+    "specs": [
+      {"name": "a0_leader", "version": "v1.0.0", "tag": "stable", "role": "TeamLeader"},
+      {"name": "a1_asset_manager", "version": "v1.3.1", "tag": "stable"},
+      {"name": "a2_threat_detector", "version": "v1.3.2", "tag": "stable"},
+      {"name": "a3_vuln_verifier", "version": "v1.3.1", "tag": "stable"},
+      {"name": "a4_compliance_guard", "version": "v1.3.1", "tag": "stable"},
+      {"name": "a5_incident_responder", "version": "v1.3.1", "tag": "stable"},
+      {"name": "a6_quality_steward", "version": "v1.3.1", "tag": "stable"},
+      {"name": "a7_knowledge_weaver", "version": "v1.3.1", "tag": "stable"}
+    ]
+  },
+  "release_lifecycle": [
+    {"phase": "draft", "description": "本地开发,无 Registry"},
+    {"phase": "snapshot", "description": "开发版,灰度发布给 1% Worker"},
+    {"phase": "candidate", "description": "预发,50% Worker"},
+    {"phase": "stable", "description": "正式版,100% Worker"},
+    {"phase": "deprecated", "description": "已废弃,保留 1 个版本可回滚"},
+    {"phase": "archived", "description": "归档,不可加载"}
+  ],
+  "rollback_policy": {
+    "auto_rollback_triggers": [
+      "skill_deviation_alert > 15%",
+      "rule_drift_alert > 20%",
+      "rag_health_score < 80",
+      "agent_output_quality_score < 70 连续 3 次"
+    ],
+    "rollback_action": "重新加载上一个 stable 版本的 Skill + 重启 Worker"
+  }
+}

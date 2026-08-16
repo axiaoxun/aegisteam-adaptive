@@ -1,0 +1,72 @@
+# AegisTeam Adaptive — .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Node / Web 前端
+web/node_modules/
+web/dist/
+web/.vite/
+web/.env.local
+web/.env.*.local
+web/npm-debug.log*
+web/yarn-debug.log*
+web/yarn-error.log*
+web/pnpm-debug.log*
+web/.parcel-cache
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# 日志
+*.log
+logs/
+*.pid
+
+# 临时文件
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*~
+
+# 凭据 / 密钥(绝对不能入库)
+.env
+*.pem
+*.key
+config.local.json
+secrets.yaml
+
+# 提交物(单独打 zip,不入库)
+submission/
+*.zip
+!docs/*.zip
+
+# 大文件
+*.iso
+*.dmg
+*.tar.gz
+*.tgz

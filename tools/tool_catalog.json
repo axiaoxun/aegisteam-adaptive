@@ -1,0 +1,86 @@
+{
+  "transport": "http-mock-tool-gateway",
+  "base_url": "http://<TOOL_HOST_REACHABLE_BY_WORKER>:18090",
+  "call_pattern": "POST /tools/{scenario_id}/{tool_name}.{function_name}",
+  "scenario_id_values": [
+    "alert_brute_force",
+    "regulator_notice",
+    "new_regulation"
+  ],
+  "tools": [
+    {
+      "name": "mock_cmdb",
+      "kind": "http-mock-adapter",
+      "functions": ["get_asset", "list_assets"],
+      "future_mcp_mapping": "cmdb.get_asset / cmdb.list_assets",
+      "real_product_references": [
+        "阿里云 CMDB(企业版)",
+        "腾讯云 TKE CMDB",
+        "蓝凌 CMP 资产管理"
+      ]
+    },
+    {
+      "name": "mock_sbom",
+      "kind": "http-mock-adapter",
+      "functions": ["get_components", "scan_vulnerabilities"],
+      "future_mcp_mapping": "sbom.cyclonedx.query / sbom.vuln.scan",
+      "real_product_references": [
+        "Anchore Enterprise",
+        "FOSSA",
+        "Snyk Open Source"
+      ]
+    },
+    {
+      "name": "mock_siem",
+      "kind": "http-mock-adapter",
+      "functions": ["search_events", "get_alert"],
+      "future_mcp_mapping": "siem.events.search / siem.alerts.get",
+      "real_product_references": [
+        "Splunk Enterprise Security",
+        "IBM QRadar SIEM",
+        "奇安信态势感知 NDR",
+        "阿里云云安全中心"
+      ],
+      "event_format": "CEF(Common Event Format) 扩展字段"
+    },
+    {
+      "name": "mock_vuln_scanner",
+      "kind": "http-mock-adapter",
+      "functions": ["scan_target", "get_cve_info"],
+      "future_mcp_mapping": "vuln_scanner.scan / cve.info",
+      "real_product_references": [
+        "Nessus / Tenable.sc",
+        "Qualys VMDR",
+        "绿盟远程安全评估系统",
+        "启明星辰天镜脆弱性扫描"
+      ],
+      "vuln_format": "CVE 5.0 + EPSS + CISA KEV 三段式"
+    },
+    {
+      "name": "mock_threat_intel",
+      "kind": "http-mock-adapter",
+      "functions": ["query_ioc", "lookup_malware"],
+      "future_mcp_mapping": "ti.ioc.query / ti.malware.lookup",
+      "real_product_references": [
+        "微步在线 ThreatBook",
+        "奇安信威胁情报中心",
+        "VirusTotal",
+        "AlienVault OTX"
+      ],
+      "ioc_format": "STIX 2.1 风格"
+    },
+    {
+      "name": "mock_notify",
+      "kind": "http-mock-adapter",
+      "functions": ["send_message", "list_channels"],
+      "future_mcp_mapping": "notify.send / notify.channels.list",
+      "real_product_references": [
+        "钉钉自定义机器人",
+        "企业微信应用消息",
+        "飞书自定义机器人",
+        "SMTP 邮件"
+      ],
+      "channel_types": ["dingtalk", "wecom", "feishu", "smtp"]
+    }
+  ]
+}

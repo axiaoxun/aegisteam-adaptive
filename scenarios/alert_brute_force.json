@@ -1,0 +1,303 @@
+{
+  "id": "alert_brute_force",
+  "incident_id": "INC-2001",
+  "title": "SSH 暴力破解告警:web-app-prod-01 遭 5 个不同 IP 攻击",
+  "scenario_summary": "9:01 SIEM 检测到 web-app-prod-01 的 22 端口 5 分钟内被 5 个不同 IP 尝试 217 次 SSH 登录,失败率 100%,其中 1 个 IP 在威胁情报中被标记为 Tor 出口节点。同时漏洞扫描显示该资产存在 OpenSSH < 8.5 的已知 CVE(CVE-2023-38408)。",
+  "customer": {
+    "name": "Hangzhou Demo SaaS Co.",
+    "owner": "Zhang San (DevOps Lead)",
+    "environment": "aliyun-ecs + nacos + higress + mysql + rds"
+  },
+  "assets": [
+    {
+      "id": "web-app-prod-01",
+      "name": "Web 应用生产服务器 #1",
+      "type": "ecs",
+      "ip": "10.0.1.21",
+      "public_ip": "47.98.x.x",
+      "os": "CentOS 7.9",
+      "status": "running",
+      "criticality": "P1",
+      "business_owner": "Zhang San",
+      "data_classification": "公开 + 内部",
+      "compliance_scope": ["等保2.0-三级"],
+      "tags": {"env": "prod", "biz": "web", "exposed": "internet"}
+    },
+    {
+      "id": "web-app-prod-02",
+      "name": "Web 应用生产服务器 #2",
+      "type": "ecs",
+      "ip": "10.0.1.22",
+      "public_ip": "47.98.x.y",
+      "os": "CentOS 7.9",
+      "status": "running",
+      "criticality": "P1",
+      "business_owner": "Zhang San",
+      "tags": {"env": "prod", "biz": "web"}
+    }
+  ],
+  "sboms": {
+    "web-app-prod-01": [
+      {
+        "bom-ref": "pkg:generic/openssh@7.4p1",
+        "type": "library",
+        "name": "OpenSSH",
+        "version": "7.4p1",
+        "purl": "pkg:generic/openssh@7.4p1",
+        "licenses": [{"license": {"id": "BSD-2-Clause"}}],
+        "supplier": {"name": "OpenBSD", "contact": [{"email": "openssh@openbsd.org"}]}
+      },
+      {
+        "bom-ref": "pkg:generic/openssl@1.0.2k",
+        "type": "library",
+        "name": "OpenSSL",
+        "version": "1.0.2k",
+        "purl": "pkg:generic/openssl@1.0.2k",
+        "licenses": [{"license": {"id": "OpenSSL"}}]
+      }
+    ]
+  },
+  "vulnerabilities": [
+    {
+      "id": "VULN-2001-001",
+      "cve_id": "CVE-2023-38408",
+      "affected_assets": ["web-app-prod-01"],
+      "component": "openssh",
+      "version_affected": "< 8.5",
+      "severity": "HIGH",
+      "cvss_v3": 8.1,
+      "epss_score": 0.42,
+      "kev_listed": false,
+      "description": "OpenSSH ssh-agent forwarding vulnerability on the server side.",
+      "fix_versions": ["8.5p1", "9.0p1"],
+      "discovered_at": "2023-07-19",
+      "source": "NVD + EPSS"
+    }
+  ],
+  "events": [
+    {
+      "time": "2026-08-16T09:01:23+08:00",
+      "cef_version": "0",
+      "device_vendor": "AegisSIEM",
+      "device_product": "MockSIEM",
+      "device_version": "1.5",
+      "signature_id": "SSH_BRUTE_FORCE_5MIN",
+      "name": "SSH Brute Force Attempt",
+      "severity": "HIGH",
+      "src": "185.220.101.45",
+      "dst": "10.0.1.21",
+      "dst_port": 22,
+      "request": "sshd: Failed password for invalid user admin from 185.220.101.45 port 51234 ssh2",
+      "extension": {
+        "act": "blocked",
+        "outcome": "failure",
+        "rt": "Aug 16 2026 09:01:23",
+        "dvchost": "siem-aegisteam",
+        "externalId": "EVT-20260816-0901-001",
+        "category": "Authentication",
+        "cnt": 47,
+        "flexString1": "user=admin",
+        "flexString2": "reason=invalid_user"
+      }
+    },
+    {
+      "time": "2026-08-16T09:02:11+08:00",
+      "cef_version": "0",
+      "device_vendor": "AegisSIEM",
+      "device_product": "MockSIEM",
+      "device_version": "1.5",
+      "signature_id": "SSH_BRUTE_FORCE_5MIN",
+      "name": "SSH Brute Force Attempt",
+      "severity": "HIGH",
+      "src": "185.220.102.7",
+      "dst": "10.0.1.21",
+      "dst_port": 22,
+      "request": "sshd: Failed password for invalid user root from 185.220.102.7 port 33456 ssh2",
+      "extension": {
+        "act": "blocked",
+        "outcome": "failure",
+        "rt": "Aug 16 2026 09:02:11",
+        "externalId": "EVT-20260816-0902-011",
+        "category": "Authentication",
+        "cnt": 33,
+        "flexString1": "user=root",
+        "flexString2": "reason=invalid_user"
+      }
+    },
+    {
+      "time": "2026-08-16T09:03:47+08:00",
+      "cef_version": "0",
+      "device_vendor": "AegisSIEM",
+      "device_product": "MockSIEM",
+      "device_version": "1.5",
+      "signature_id": "SSH_BRUTE_FORCE_5MIN",
+      "name": "SSH Brute Force Attempt",
+      "severity": "HIGH",
+      "src": "45.142.214.89",
+      "dst": "10.0.1.21",
+      "dst_port": 22,
+      "request": "sshd: Failed password for invalid user oracle from 45.142.214.89 port 44001 ssh2",
+      "extension": {
+        "act": "blocked",
+        "outcome": "failure",
+        "rt": "Aug 16 2026 09:03:47",
+        "externalId": "EVT-20260816-0903-047",
+        "category": "Authentication",
+        "cnt": 28
+      }
+    },
+    {
+      "time": "2026-08-16T09:04:55+08:00",
+      "device_vendor": "higress-gateway",
+      "device_product": "HigressWAF",
+      "device_version": "2.1",
+      "signature_id": "SSH_FROM_INTERNET",
+      "name": "SSH 22 端口被外网访问",
+      "severity": "MEDIUM",
+      "src": "47.98.x.x:22",
+      "dst": "any",
+      "extension": {
+        "act": "allowed",
+        "outcome": "success",
+        "rt": "Aug 16 2026 09:04:55",
+        "category": "Network",
+        "flexString1": "policy=public-ssh-allowed",
+        "flexString2": "alert=should-be-blocked"
+      }
+    }
+  ],
+  "alerts": [
+    {
+      "id": "ALERT-2001",
+      "time": "2026-08-16T09:05:00+08:00",
+      "name": "SSH 暴力破解检测(5 个独立 IP)",
+      "severity": "CRITICAL",
+      "score": 92.5,
+      "source_siem": "AegisSIEM",
+      "asset": "web-app-prod-01",
+      "indicators": [
+        "5 个不同 IP",
+        "5 分钟内 217 次失败登录",
+        "失败率 100%",
+        "1 个 IP 在威胁情报中标记为 Tor 出口"
+      ],
+      "linked_events": ["EVT-20260816-0901-001", "EVT-20260816-0902-011", "EVT-20260816-0903-047"],
+      "triage_status": "open",
+      "evidence_ref": "alert:SSH_BRUTE_FORCE_5MIN"
+    }
+  ],
+  "scan_results": {
+    "web-app-prod-01": {
+      "target": "web-app-prod-01",
+      "scan_type": "full",
+      "scan_time": "2026-08-16T08:30:00+08:00",
+      "vulnerabilities": [
+        {
+          "cve_id": "CVE-2023-38408",
+          "component": "openssh 7.4p1",
+          "severity": "HIGH",
+          "cvss_v3": 8.1,
+          "port": 22,
+          "exploit_available": true
+        },
+        {
+          "cve_id": "CVE-2020-15778",
+          "component": "openssh 7.4p1",
+          "severity": "MEDIUM",
+          "cvss_v3": 7.8,
+          "port": 22,
+          "exploit_available": true,
+          "description": "scp 命令注入漏洞"
+        }
+      ],
+      "open_ports": [
+        {"port": 22, "service": "ssh", "exposed_to": "internet", "risk": "high"},
+        {"port": 80, "service": "http", "exposed_to": "internet"},
+        {"port": 443, "service": "https", "exposed_to": "internet"}
+      ]
+    }
+  },
+  "cve_database": {
+    "CVE-2023-38408": {
+      "cve_id": "CVE-2023-38408",
+      "cvss_v3": 8.1,
+      "epss_score": 0.42,
+      "kev_listed": false,
+      "description": "OpenSSH ssh-agent forwarding vulnerability on the server side. In ssh-agent forwarding, a remote attacker could potentially load and execute PKCS#11 modules from the agent's host.",
+      "affected_products": ["OpenSSH 7.4p1 - 8.4p1"],
+      "fix_versions": ["8.5p1", "9.0p1"],
+      "published_at": "2023-07-19",
+      "source": "NVD + EPSS + Red Hat Security Data"
+    },
+    "CVE-2020-15778": {
+      "cve_id": "CVE-2020-15778",
+      "cvss_v3": 7.8,
+      "epss_score": 0.78,
+      "kev_listed": false,
+      "description": "scp in OpenSSH 8.3p1 and earlier allows command injection when processing untrusted SCP file names.",
+      "affected_products": ["OpenSSH < 8.3p1"],
+      "fix_versions": ["8.3p1"],
+      "published_at": "2020-08-17"
+    }
+  },
+  "iocs": [
+    {
+      "id": "IOC-2024-TOR-001",
+      "type": "ip",
+      "value": "185.220.101.45",
+      "verdict": "malicious",
+      "confidence": 0.95,
+      "source": "MockTI",
+      "first_seen": "2024-01-12",
+      "last_seen": "2026-08-15",
+      "tags": ["tor-exit-node", "brute-force", "ssh-attack"],
+      "related_threat_actors": ["APT-29-mock", "BruteForce-BotNet-007"]
+    },
+    {
+      "id": "IOC-2024-TOR-002",
+      "type": "ip",
+      "value": "185.220.102.7",
+      "verdict": "suspicious",
+      "confidence": 0.72,
+      "source": "MockTI",
+      "first_seen": "2024-05-03",
+      "tags": ["tor-exit-node", "scanning"]
+    },
+    {
+      "id": "IOC-2024-BF-003",
+      "type": "ip",
+      "value": "45.142.214.89",
+      "verdict": "malicious",
+      "confidence": 0.88,
+      "source": "MockTI",
+      "first_seen": "2025-11-22",
+      "tags": ["brute-force", "ssh-attack", "known-botnet"]
+    }
+  ],
+  "malware_db": {
+    "Mirai": {
+      "family": "Mirai",
+      "aliases": ["Mirai", "Okiru", "Masuta"],
+      "first_seen": "2016-09-30",
+      "category": "botnet",
+      "description": "Mirai 僵尸网络主要感染 IoT 设备,但其变种持续被用于 SSH/Telnet 暴力破解,以构建新的 DDoS 僵尸网络。",
+      "ttps": ["T1110.001 - Password Guessing", "T1078 - Valid Accounts"],
+      "associated_iocs": ["IOC-2024-BF-003"],
+      "mitre_id": "G01304"
+    }
+  },
+  "expected_root_cause": {
+    "type": "external_attack",
+    "summary": "5 个外部 IP(其中 1 个 Tor 出口节点)在 5 分钟内对 web-app-prod-01 发起 SSH 暴力破解,共 217 次失败登录。结合漏洞扫描结果,该资产 OpenSSH 版本存在已知 CVE-2023-38408(高危)。Higress WAF 规则 public-ssh-allowed 错误放行了 22 端口外网访问。"
+  },
+  "expected_response": {
+    "risk_level": "L2",
+    "auto_execute": false,
+    "actions": [
+      {"step": 1, "type": "block_ioc", "tool": "nacos.config", "detail": "在 Higress WAF 拉黑 5 个攻击 IP", "risk": "L1"},
+      {"step": 2, "type": "patch_openssh", "tool": "ansible", "detail": "升级 OpenSSH 到 9.0p1", "risk": "L2", "need_approval": true},
+      {"step": 3, "type": "force_password_reset", "tool": "nacos.config", "detail": "强制所有 SSH 用户重置密码并启用 MFA", "risk": "L2", "need_approval": true},
+      {"step": 4, "type": "audit_log_review", "tool": "siem", "detail": "审计 SSH 登录日志,确认无成功登录", "risk": "L0"}
+    ]
+  }
+}

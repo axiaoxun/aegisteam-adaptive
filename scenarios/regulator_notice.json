@@ -1,0 +1,231 @@
+{
+  "id": "regulator_notice",
+  "incident_id": "INC-2002",
+  "title": "省网安通报:某金融科技公司存在弱口令、数据出境未评估",
+  "scenario_summary": "9:30 收到省网安部门邮件通报,指出本公司 3 套生产数据库存在弱口令(admin/admin123)、用户数据疑似出境且未做个人信息保护影响评估,要求 7 个工作日内提交整改报告。",
+  "customer": {
+    "name": "Hangzhou Demo FinTech Co.",
+    "owner": "Li Si (Compliance Director)",
+    "environment": "私有云 + 公有云混合 + 阿里云 RDS + 跨境业务"
+  },
+  "regulator": {
+    "name": "浙江省公安厅网络安全保卫总队",
+    "channel": "邮件 + 政务平台",
+    "notice_id": "ZJWA-2026-0816-001",
+    "received_at": "2026-08-16T09:30:00+08:00",
+    "deadline": "2026-08-25T18:00:00+08:00",
+    "items": [
+      {
+        "code": "R-001",
+        "issue": "生产数据库 admin 账户使用默认口令 admin/admin123",
+        "law_basis": "等保2.0-三级 8.1.4.2 身份鉴别",
+        "severity": "HIGH"
+      },
+      {
+        "code": "R-002",
+        "issue": "用户身份证号、手机号疑似通过海外 API 出境",
+        "law_basis": "数据安全法 第21条 / 个保法 第39条 / 数据出境安全评估办法",
+        "severity": "CRITICAL"
+      },
+      {
+        "code": "R-003",
+        "issue": "3 个高敏感数据库未做个人信息保护影响评估(PIA)",
+        "law_basis": "个保法 第55条",
+        "severity": "HIGH"
+      }
+    ]
+  },
+  "assets": [
+    {
+      "id": "db-user-prod-01",
+      "name": "用户核心库(MySQL) - 生产",
+      "type": "rds",
+      "ip": "10.20.1.10",
+      "engine": "MySQL 8.0",
+      "status": "running",
+      "criticality": "P0",
+      "data_classification": "PII-敏感",
+      "data_volume_gb": 580,
+      "compliance_scope": ["等保2.0-三级", "个保法", "数据安全法"],
+      "tags": {"env": "prod", "data": "PII", "exposed": "internal"}
+    },
+    {
+      "id": "db-trade-prod-01",
+      "name": "交易流水库(PolarDB) - 生产",
+      "type": "polardb",
+      "ip": "10.20.1.11",
+      "engine": "PolarDB MySQL 8.0",
+      "status": "running",
+      "criticality": "P0",
+      "data_classification": "PII-敏感+金融",
+      "data_volume_gb": 1200,
+      "compliance_scope": ["等保2.0-三级", "个保法", "数据安全法", "网络安全审查办法"],
+      "tags": {"env": "prod", "data": "PII+Financial", "exposed": "internal"}
+    },
+    {
+      "id": "db-mkt-prod-01",
+      "name": "营销分析库(ADB) - 生产",
+      "type": "analyticdb",
+      "ip": "10.20.2.5",
+      "engine": "AnalyticDB MySQL 3.0",
+      "status": "running",
+      "criticality": "P1",
+      "data_classification": "PII-敏感",
+      "data_volume_gb": 320,
+      "compliance_scope": ["等保2.0-三级", "个保法", "数据安全法"],
+      "tags": {"env": "prod", "data": "PII", "exposed": "internal"}
+    }
+  ],
+  "sboms": {
+    "db-user-prod-01": [
+      {
+        "bom-ref": "pkg:generic/mysql@8.0.32",
+        "type": "library",
+        "name": "MySQL Server",
+        "version": "8.0.32",
+        "purl": "pkg:generic/mysql@8.0.32",
+        "licenses": [{"license": {"id": "GPL-2.0"}}]
+      }
+    ]
+  },
+  "vulnerabilities": [
+    {
+      "id": "VULN-2002-001",
+      "affected_assets": ["db-user-prod-01", "db-trade-prod-01", "db-mkt-prod-01"],
+      "type": "weak_credential",
+      "severity": "HIGH",
+      "cvss_v3": 8.4,
+      "description": "admin 账户使用默认口令 admin/admin123",
+      "discovered_at": "2026-08-16T09:25:00+08:00",
+      "source": "监管通报 + 内部审计",
+      "remediation": "立即禁用默认账户,强制启用 IAM + 强密码策略 + MFA"
+    }
+  ],
+  "events": [
+    {
+      "time": "2026-08-10T14:23:11+08:00",
+      "device_vendor": "db-firewall",
+      "device_product": "AegisDB-FW",
+      "device_version": "3.0",
+      "signature_id": "DB_CROSS_BORDER_QUERY",
+      "name": "疑似数据出境查询",
+      "severity": "HIGH",
+      "src": "10.20.1.10",
+      "dst": "api.twelvedata.com",
+      "dst_port": 443,
+      "request": "SELECT id_number, phone FROM user_table WHERE created_at > '2026-08-01'",
+      "extension": {
+        "act": "detected",
+        "outcome": "success",
+        "rt": "Aug 10 2026 14:23:11",
+        "category": "DataExfiltration",
+        "flexString1": "rows=15842",
+        "flexString2": "dest_country=US"
+      }
+    },
+    {
+      "time": "2026-08-12T03:11:45+08:00",
+      "device_vendor": "db-firewall",
+      "device_product": "AegisDB-FW",
+      "device_version": "3.0",
+      "signature_id": "DB_CROSS_BORDER_QUERY",
+      "name": "疑似数据出境查询",
+      "severity": "HIGH",
+      "src": "10.20.1.10",
+      "dst": "api.twelvedata.com",
+      "dst_port": 443,
+      "request": "SELECT id_number, phone, name FROM user_table WHERE id_number IS NOT NULL LIMIT 50000",
+      "extension": {
+        "act": "detected",
+        "outcome": "success",
+        "rt": "Aug 12 2026 03:11:45",
+        "category": "DataExfiltration",
+        "flexString1": "rows=50000",
+        "flexString2": "dest_country=US",
+        "flexString3": "time_window=03:00-04:00"
+      }
+    }
+  ],
+  "alerts": [
+    {
+      "id": "ALERT-2002-A",
+      "time": "2026-08-16T09:30:00+08:00",
+      "name": "监管通报受理",
+      "severity": "CRITICAL",
+      "score": 100,
+      "source_siem": "ComplianceGateway",
+      "incident_type": "regulator_notice",
+      "notice_ref": "ZJWA-2026-0816-001",
+      "triage_status": "open",
+      "evidence_ref": "notice:ZJWA-2026-0816-001"
+    }
+  ],
+  "scan_results": {
+    "db-user-prod-01": {
+      "target": "db-user-prod-01",
+      "scan_type": "compliance",
+      "vulnerabilities": [
+        {
+          "type": "weak_credential",
+          "account": "admin",
+          "risk": "HIGH",
+          "remediation": "disable_default_account + IAM + MFA"
+        }
+      ]
+    }
+  },
+  "cve_database": {},
+  "iocs": [],
+  "malware_db": {},
+  "expected_root_cause": {
+    "type": "compliance_violation",
+    "summary": "公司 3 套生产数据库 admin 账户使用默认口令;海外 API 调取用户敏感数据未做 PIA 也未做数据出境安全评估,违反等保2.0、个保法、数据安全法及数据出境安全评估办法。"
+  },
+  "expected_response": {
+    "risk_level": "L3",
+    "auto_execute": false,
+    "actions": [
+      {
+        "phase": "immediate_24h",
+        "type": "block_data_export",
+        "tool": "nacos.config",
+        "detail": "立即在 DB 防火墙阻断对 api.twelvedata.com 的所有查询",
+        "risk": "L1",
+        "deadline": "2026-08-17T09:30:00+08:00"
+      },
+      {
+        "phase": "immediate_24h",
+        "type": "disable_default_account",
+        "tool": "nacos.config + IAM",
+        "detail": "禁用 3 套数据库的 admin/admin123 默认账户,启用 IAM + MFA",
+        "risk": "L1",
+        "deadline": "2026-08-17T09:30:00+08:00"
+      },
+      {
+        "phase": "short_term_7d",
+        "type": "pia_assessment",
+        "tool": "compliance_platform",
+        "detail": "对 3 个高敏感数据库做个人信息保护影响评估(PIA)",
+        "risk": "L2",
+        "need_approval": true,
+        "deadline": "2026-08-23T18:00:00+08:00"
+      },
+      {
+        "phase": "short_term_7d",
+        "type": "data_export_audit",
+        "tool": "siem",
+        "detail": "审计近 90 天所有数据出境查询,统计影响人数并报备",
+        "risk": "L1"
+      },
+      {
+        "phase": "long_term_30d",
+        "type": "compliance_policy",
+        "tool": "governance",
+        "detail": "制定《数据出境管理办法》《数据库口令管理办法》",
+        "risk": "L3",
+        "need_approval": true,
+        "deadline": "2026-09-15T18:00:00+08:00"
+      }
+    ]
+  }
+}

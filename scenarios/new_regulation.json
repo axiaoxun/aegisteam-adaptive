@@ -1,0 +1,212 @@
+{
+  "id": "new_regulation",
+  "incident_id": "INC-2003",
+  "title": "新法规响应:《生成式 AI 服务管理暂行办法》2026-09-01 实施",
+  "scenario_summary": "10:00 法务部告知《生成式 AI 服务管理暂行办法》将于 9 月 1 日实施,要求 3 周内完成 3 个 AI 应用的合规对齐,涉及管理路径(写本单位管理办法)和技术路径(算法备案+安全评估+数据合规+内容审核)。",
+  "customer": {
+    "name": "Hangzhou Demo Internet Hospital Co.",
+    "owner": "Wang Wu (Legal Director) + Zhao Liu (CTO)",
+    "environment": "阿里云 + 自研 AI 中台 + 多个生成式 AI 应用"
+  },
+  "new_regulation": {
+    "name": "生成式 AI 服务管理暂行办法(2026 修订版)",
+    "issuing_authority": "国家网信办 + 工业和信息化部 + 公安部",
+    "effective_date": "2026-09-01T00:00:00+08:00",
+    "published_at": "2026-08-01",
+    "deadline": "2026-08-31T18:00:00+08:00",
+    "key_articles": [
+      {"article": "第7条", "requirement": "生成式 AI 服务提供者应完成算法备案(深度合成服务)", "owner_role": "合规官(角色)"},
+      {"article": "第10条", "requirement": "训练数据合规:不得侵犯知识产权,涉及个人信息需取得同意", "owner_role": "DBA(角色)"},
+      {"article": "第14条", "requirement": "内容安全:对生成内容进行标识、过滤,涉政/涉暴/涉黄/涉谣言必须拦截", "owner_role": "安全工程师(角色)"},
+      {"article": "第17条", "requirement": "用户实名认证+日志留存 6 个月", "owner_role": "安全工程师(角色)"},
+      {"article": "第22条", "requirement": "重大变更或新模型上线需重新做安全评估", "owner_role": "业务负责人(角色)"}
+    ]
+  },
+  "assets": [
+    {
+      "id": "ai-app-consult",
+      "name": "AI 智能问诊助手",
+      "type": "ai-application",
+      "model": "Qwen-72B-Chat",
+      "deployment": "阿里云 PAI-EAS",
+      "status": "running",
+      "data_in": "用户症状描述+病历摘要",
+      "data_out": "问诊建议+用药提醒",
+      "user_count_daily": 28000,
+      "compliance_scope": ["生成式AI办法", "互联网诊疗管理办法", "个保法"],
+      "tags": {"env": "prod", "biz": "healthcare", "ai": "generative", "data": "PII-sensitive"}
+    },
+    {
+      "id": "ai-app-medreport",
+      "name": "AI 病历摘要生成器",
+      "type": "ai-application",
+      "model": "Qwen-72B-Chat",
+      "deployment": "阿里云 PAI-EAS",
+      "status": "running",
+      "data_in": "医生口述录音转写+检验报告",
+      "data_out": "结构化病历摘要",
+      "user_count_daily": 8500,
+      "compliance_scope": ["生成式AI办法", "电子病历管理办法", "个保法"],
+      "tags": {"env": "prod", "biz": "healthcare", "ai": "generative", "data": "PII-sensitive+Medical"}
+    },
+    {
+      "id": "ai-app-edu",
+      "name": "AI 健康科普内容生成器",
+      "type": "ai-application",
+      "model": "Qwen-14B-Chat",
+      "deployment": "自建 GPU 集群",
+      "status": "running",
+      "data_in": "医学知识库",
+      "data_out": "健康科普文章",
+      "user_count_daily": 120000,
+      "compliance_scope": ["生成式AI办法", "广告法", "医疗广告管理办法"],
+      "tags": {"env": "prod", "biz": "healthcare-edu", "ai": "generative"}
+    }
+  ],
+  "sboms": {
+    "ai-app-consult": [
+      {
+        "bom-ref": "pkg:pypi/qwen-sdk@1.5.0",
+        "type": "library",
+        "name": "Qwen SDK",
+        "version": "1.5.0",
+        "purl": "pkg:pypi/qwen-sdk@1.5.0",
+        "licenses": [{"license": {"id": "Apache-2.0"}}]
+      },
+      {
+        "bom-ref": "pkg:pypi/langchain@0.2.6",
+        "type": "library",
+        "name": "LangChain",
+        "version": "0.2.6",
+        "purl": "pkg:pypi/langchain@0.2.6",
+        "licenses": [{"license": {"id": "MIT"}}]
+      }
+    ]
+  },
+  "vulnerabilities": [
+    {
+      "id": "VULN-2003-001",
+      "affected_assets": ["ai-app-consult"],
+      "type": "compliance_gap",
+      "severity": "HIGH",
+      "article_ref": "生成式AI办法 第7条",
+      "description": "AI 智能问诊助手未完成深度合成服务算法备案",
+      "remediation": "向网信办提交算法备案申请,预计 10 个工作日",
+      "discovered_at": "2026-08-16T10:00:00+08:00"
+    },
+    {
+      "id": "VULN-2003-002",
+      "affected_assets": ["ai-app-consult", "ai-app-medreport", "ai-app-edu"],
+      "type": "compliance_gap",
+      "severity": "HIGH",
+      "article_ref": "生成式AI办法 第14条",
+      "description": "3 个 AI 应用未对生成内容做安全标识,无内容审核策略",
+      "remediation": "接入阿里云内容安全 API + 自建关键词/语义审核"
+    },
+    {
+      "id": "VULN-2003-003",
+      "affected_assets": ["ai-app-consult", "ai-app-medreport"],
+      "type": "compliance_gap",
+      "severity": "MEDIUM",
+      "article_ref": "生成式AI办法 第17条",
+      "description": "用户未实名认证,日志留存不足 6 个月",
+      "remediation": "接入实名认证,日志入 SLS 留存 6 个月"
+    }
+  ],
+  "events": [
+    {
+      "time": "2026-08-15T18:22:11+08:00",
+      "device_vendor": "ai-gateway",
+      "device_product": "AegisAI-Audit",
+      "device_version": "1.2",
+      "signature_id": "AI_OUTPUT_NO_WATERMARK",
+      "name": "AI 输出未加水印",
+      "severity": "MEDIUM",
+      "src": "ai-app-consult",
+      "extension": {
+        "act": "detected",
+        "outcome": "violation",
+        "rt": "Aug 15 2026 18:22:11",
+        "category": "AISafety",
+        "flexString1": "no_watermark=true",
+        "flexString2": "article=14"
+      }
+    },
+    {
+      "time": "2026-08-15T22:08:33+08:00",
+      "device_vendor": "ai-gateway",
+      "device_product": "AegisAI-Audit",
+      "device_version": "1.2",
+      "signature_id": "AI_OUTPUT_POLITICAL",
+      "name": "AI 输出涉政内容未拦截",
+      "severity": "HIGH",
+      "src": "ai-app-edu",
+      "extension": {
+        "act": "allowed",
+        "outcome": "violation",
+        "rt": "Aug 15 2026 22:08:33",
+        "category": "AISafety",
+        "flexString1": "content_keywords=3",
+        "flexString2": "article=14",
+        "flexString3": "confidence=0.87"
+      }
+    }
+  ],
+  "alerts": [
+    {
+      "id": "ALERT-2003",
+      "time": "2026-08-16T10:00:00+08:00",
+      "name": "新法规合规检查触发:3 个 AI 应用存在 5 项合规缺口",
+      "severity": "HIGH",
+      "score": 87,
+      "source_siem": "ComplianceGateway",
+      "incident_type": "new_regulation",
+      "regulation_ref": "生成式AI办法-2026-修订版",
+      "triage_status": "open",
+      "evidence_ref": "regulation:genai-2026-rev"
+    }
+  ],
+  "scan_results": {
+    "ai-app-consult": {
+      "target": "ai-app-consult",
+      "scan_type": "ai_compliance",
+      "vulnerabilities": [
+        {"type": "compliance_gap", "article": "第7条", "risk": "HIGH", "detail": "未做算法备案"},
+        {"type": "compliance_gap", "article": "第14条", "risk": "HIGH", "detail": "无内容审核"},
+        {"type": "compliance_gap", "article": "第17条", "risk": "MEDIUM", "detail": "日志留存不足"}
+      ]
+    }
+  },
+  "cve_database": {},
+  "iocs": [],
+  "malware_db": {},
+  "expected_root_cause": {
+    "type": "regulatory_change",
+    "summary": "新法规《生成式 AI 服务管理暂行办法》将于 9 月 1 日实施,本公司 3 个生成式 AI 应用存在 5 项合规缺口(算法备案/内容审核/实名认证/日志留存/数据合规),需在 3 周内完成管理路径(写管理办法)+技术路径(对接内容安全+实名认证+日志归档)的双路径整改。"
+  },
+  "expected_response": {
+    "risk_level": "L3",
+    "auto_execute": false,
+    "two_track": {
+      "management_track": {
+        "owner_role": "合规官(角色) + 业务负责人(角色)",
+        "actions": [
+          {"step": 1, "type": "draft_policy", "detail": "草拟《生成式 AI 服务合规管理办法(试行)》", "deadline": "2026-08-23T18:00:00+08:00"},
+          {"step": 2, "type": "pia_assessment", "detail": "对 3 个 AI 应用做个人信息保护影响评估(PIA)", "deadline": "2026-08-25T18:00:00+08:00"},
+          {"step": 3, "type": "algorithm_filing", "detail": "向网信办提交深度合成服务算法备案", "deadline": "2026-08-30T18:00:00+08:00", "approval_required": true},
+          {"step": 4, "type": "user_notification", "detail": "更新用户协议,告知 AI 服务变更并取得用户同意", "deadline": "2026-08-28T18:00:00+08:00"}
+        ]
+      },
+      "technical_track": {
+        "owner_role": "DBA(角色) + 安全工程师(角色) + 业务负责人(角色)",
+        "actions": [
+          {"step": 1, "type": "content_safety", "tool": "aliyun.green", "detail": "对接阿里云内容安全 API(aliyun.green),覆盖政治/涉暴/涉黄/涉谣言/医疗违规 5 大类", "deadline": "2026-08-22T18:00:00+08:00", "approval_required": true},
+          {"step": 2, "type": "watermark", "tool": "ai-gateway", "detail": "AI 输出统一加水印(数字水印+可追溯)", "deadline": "2026-08-22T18:00:00+08:00"},
+          {"step": 3, "type": "real_name_auth", "tool": "aliyun.rp", "detail": "接入阿里云实名认证,3 个 AI 应用全量对接", "deadline": "2026-08-25T18:00:00+08:00"},
+          {"step": 4, "type": "log_archival", "tool": "aliyun.sls", "detail": "AI 请求/响应日志入 SLS,留存 6 个月(默认 90 天),审计可检索", "deadline": "2026-08-25T18:00:00+08:00"},
+          {"step": 5, "type": "data_lineage", "tool": "rag", "detail": "梳理 3 个 AI 应用的训练数据来源,补全数据授权链", "deadline": "2026-08-30T18:00:00+08:00"}
+        ]
+      }
+    }
+  }
+}
